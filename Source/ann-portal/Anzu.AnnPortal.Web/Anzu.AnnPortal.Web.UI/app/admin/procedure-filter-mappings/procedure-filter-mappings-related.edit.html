@@ -1,0 +1,245 @@
+﻿<style>
+    body {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .set-border-bottom {
+        border-bottom: solid 1px rgba(0, 0, 0, 0.12);
+        padding-bottom: 10px;
+        margin-bottom: 5px;
+    }
+
+    .mCSB_scrollTools .mCSB_draggerContainer {
+        right: -60px;
+    }
+
+    .mCSB_1_dragger_vertical {
+        background: #f00;
+    }
+
+    .mCSB_dragger_bar {
+        border-radius: 0px !important;
+        width: 8px !important;
+    }
+
+    .k-list-container {
+        white-space: nowrap !important;
+        width: auto !important;
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
+        min-width: 243px !important;
+    }
+
+    .k-list {
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
+        width: auto !important;
+    }
+
+    .ul-no-style {
+        list-style: none;
+    }
+
+    .custom-margin-left {
+        margin-left: 30px !important;
+    }
+
+    #dataList {
+        height: calc(100vh - 468px);
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
+
+    .modal-dialog, .modal-content, .custom-proc-modal {
+        min-width: 85vw;
+    }
+
+    .modal-open .modal {
+        overflow-y: hidden;
+    }
+
+    .k-grid-content table {
+        font-size: 0.9em;
+    }
+
+    .k-grid-content.k-auto-scrollable {
+        height: 45vh;
+    }
+</style>
+<div class="practice-list">
+
+    <form name="filterMappingForm" ng-init="init()" novalidate ng-cloak>
+        <div class="row list-group">
+            <div class="col-xs-2"><h4>Procedure Name</h4></div>
+            <div class="col-xs-2"><h4>Level 1</h4></div>
+            <div class="col-xs-2"><h4>Level 2</h4></div>
+            <div class="col-xs-2"><h4>Level 3</h4></div>
+            <div class="col-xs-2"><h4>Level 4</h4></div>
+            <div class="col-xs-1"><h4>Breast Implant Use</h4></div>
+            <div class="col-xs-1"><h4>Related Procedures</h4></div>
+
+        </div>
+        <div class="row" ng-repeat="item in vm.newProcedureLevels">
+            <div class="col-xs-2">
+                <input type="text" ng-model="item.name" ng-disabled="$index != 0" no-special-char>
+            </div>
+            <div class="col-xs-2" bs-tooltip data-original-title="{{item.procedureLevel1.name}}">
+                <input kendo-drop-down-list id="procedure-level1"
+                       k-option-label="'Select level 1..'"
+                       k-ng-model="item.procedureLevel1"
+                       k-data-text-field="'name'"
+                       k-data-value-field="'id'"
+                       k-filter="'contains'"
+                       k-data-source="level1Datasource"
+                       k-min-length="2"
+                       name="level1"
+                       k-ng-disabled="checkStatus(1, item, $index)"
+                       ng-model="item.procedureLevelOne" />
+            </div>
+            <div class="col-xs-2" bs-tooltip data-original-title="{{item.procedureLevel2.name}}">
+                <input kendo-drop-down-list id="procedure-level2"
+                       k-option-label="'Select level 2..'"
+                       k-ng-model="item.procedureLevel2"
+                       k-data-text-field="'name'"
+                       k-data-value-field="'id'"
+                       k-filter="'contains'"
+                       k-data-source="level2Datasource"
+                       k-min-length="2"
+                       name="level2"
+                       k-ng-disabled="checkStatus(2, item, $index)"
+                       ng-model="item.procedureLevelTwo" />
+            </div>
+            <div class="col-xs-2" bs-tooltip data-original-title="{{item.procedureLevel3.name}}">
+                <input kendo-drop-down-list id="procedure-level3"
+                       k-option-label="'Select level 3..'"
+                       k-ng-model="item.procedureLevel3"
+                       k-data-text-field="'name'"
+                       k-data-value-field="'id'"
+                       k-filter="'contains'"
+                       k-data-source="level3Datasource"
+                       k-min-length="2"
+                       name="level3"
+                       k-ng-disabled="checkStatus(3, item, $index)"
+                       ng-model="item.procedureLevelThree" />
+            </div>
+            <div class="col-xs-2" bs-tooltip data-original-title="{{item.procedureLevel4.name}}">
+                <input kendo-drop-down-list id="procedure-level4"
+                       k-option-label="'Select level 4..'"
+                       k-ng-model="item.procedureLevel4"
+                       k-data-text-field="'name'"
+                       k-data-value-field="'id'"
+                       k-filter="'contains'"
+                       k-data-source="level4Datasource"
+                       k-min-length="2"
+                       name="level4"
+                       k-ng-disabled="checkStatus(4, item, $index)"
+                       ng-model="item.procedureLevelFour" />
+            </div>
+            <div class="col-xs-1">
+                <input type="checkbox" ng-disabled="false" ng-model="item.practiceProductFlag" value="item.practiceProductFlag">
+            </div>
+            <div class="col-xs-1">
+                <button title="Add" class="icon-no-border" aria-label="Settings" ng-click="item.procedure = selectProcedure(item)">
+                    <i class="fa fa-plus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="row" ng-class="{ 'hasError' : vm.isDupplicateSequence || vm.isNotCompletedSequence}">
+            <div class="col-md-12" style="padding-bottom: 5px;">
+                <span class="errorDescription" ng-show="vm.isDupplicateSequence">Procedure level sequence already exists in the system. Please specifiy a different sequence.</span>
+                <span class="errorDescription" ng-show="vm.isNotCompletedSequence">Procedure level sequence is incomplete. Please complete before saving.</span>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-xs-12">
+                <h3>Related procedures</h3>
+            </div>
+        </div>
+        <br />
+        <div class="row" style="padding-bottom: 15px;">
+            <div class="col-xs-2"><h4>Procedure Name</h4></div>
+            <div class="col-xs-2"><h4>Level 1</h4></div>
+            <div class="col-xs-2"><h4>Level 2</h4></div>
+            <div class="col-xs-2"><h4>Level 3</h4></div>
+            <div class="col-xs-2"><h4>Level 4</h4></div>
+        </div>
+
+        <div id="dataList">
+            <div class="row set-border-bottom" ng-repeat="relatedItem in vm.RelatedProcedureLevels">
+                <div class="col-xs-2">
+                    {{relatedItem.name}}
+                </div>
+                <div class="col-xs-2">{{relatedItem.procedureLevel1.name}}</div>
+
+                <div class="col-xs-2">
+                    {{relatedItem.procedureLevel2.name}}
+                </div>
+                <div class="col-xs-2">
+                    {{relatedItem.procedureLevel3.name}}
+                </div>
+                <div class="col-xs-2">
+                    {{relatedItem.procedureLevel4.name}}
+                </div>
+                <div class="col-xs-1">
+                    <button title="Remove" ng-show="relatedItem.name" class="icon-no-border" aria-label="Settings" ng-click="removeRelatedProcedureLevel($index)">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-bar" afkl-sticky-element="bottom">
+            <button class="btn" aria-label="Settings" href="#/admin/procedure-filter-mappings/" ng-click="cancel()">Cancel</button>
+            <button class="primary" aria-label="Settings" ng-disabled="isCubeProcessing || vm.newProcedureLevels.length == 0" ng-click="saveProcedureLevelSequences(vm.newProcedureLevels, 4)">Save</button>
+        </div>
+    </form>
+
+    <modal title="Are You Sure?" visible="showModal" class="hide">
+        <div class="row" id="modal-body">
+            <p>There may be unsaved changes. Are you sure you want to leave this page?</p>
+        </div>
+        <div class="row text-right">
+            <button class="btn btn-primary" type="button" ng-click="confirmYes()">Yes</button>
+            <button class="btn btn-warning" type="button" ng-click="confirmNo()">No</button>
+        </div>
+    </modal>
+
+    <modal title="Are You Sure?" visible="showProcModal" class="hide">
+        <div class="row" id="modal-body">
+            <p>There may be unsaved changes. Are you sure you want to leave this page?</p>
+        </div>
+        <div class="row text-right">
+            <button class="btn btn-primary" type="button" ng-click="confirmProcYes()">Yes</button>
+            <button class="btn btn-warning" type="button" ng-click="confirmNo()">No</button>
+        </div>
+    </modal>
+
+    <script type="text/ng-template" id="procModalTemplate" procedure-modal title="Add Related Procedures">
+        <div class="modal-header">
+            <h3 class="modal-custom-title">Add Related Procedures</h3>
+        </div>
+        <div class="modal-body">
+            <form name="relatedProcModalForm">
+                <div class="row no-gutter">
+                    <div class="col-xs-12">
+                        <label class="col-xs-1">Search</label>
+                        <div class="col-xs-6">
+                            <input type="text" id="filterSearch" ng-keypress="enterPress($event)" placeholder="Filter by Name" />
+                        </div>
+                        <button ng-click="searchProc()">Search</button>
+                    </div>
+                    <div class="col-xs-12">
+                        <div id="procGrid" kendo-grid="procGrid" options="mainGridOptions" class="full_height fix-style">
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-right">
+                    <button id="btn_cancel" type="button" class="btn" ng-click="cancelModal()">Cancel</button>
+                    <button class="btn btn-primary" type="button" ng-click="addSelected()">Add</button>
+                </div>
+            </form>
+        </div>
+    </script>
+</div>

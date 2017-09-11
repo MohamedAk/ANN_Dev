@@ -1,0 +1,133 @@
+﻿@using System.Web.Configuration;
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.EntityFramework;
+
+@{
+    ViewBag.Title = "Upload Electronic Signature";
+}
+
+@{
+    string permissionUrl = WebConfigurationManager.AppSettings["IdentityService"];
+    string currentUser = HttpContext.Current.User.Identity.Name;
+    string domain = WebConfigurationManager.AppSettings["eEDApp"];
+    string isChange = ViewBag.isChange;
+}
+
+<script>
+    var IDENTITY_SERVICE_DOMAIN = "@permissionUrl";
+    var USER_ID = "@currentUser";
+    var APP_DOMAIN = "@domain";
+    var IS_CHANGE = "@isChange";
+</script>
+<script src="~/Assets/libs/jQuery/js/jquery-1.11.3.min.js"></script>
+<script src="~/Scripts/libs/angularJS/angular.min.js"></script>
+<script src="~/Scripts/libs/angularJS/angular-route.min.js"></script>
+<script src="~/Scripts/app/DigitalSignature.js"></script>
+
+@Styles.Render("~/bundles/kendocss")
+<div ng-app="DigitalSignatureApp" class="loginWrapper" ng-cloak>
+    <div id="digital_signature" class="forgot_password">
+
+        <div class="logo">
+            <img src="~/Images/avera_login_logo.png" />
+        </div>
+
+        <div class="info">
+
+            <div class="left_sec">
+                <img src="~/Images/avera_symbol.png" />
+            </div>
+
+            <div ng-controller="DigitalSignatureController" ng-init="Init()" class="right_sec">
+
+                <div class="header">@ViewBag.Title</div>
+
+                <form class="form-horizontal" role="form">
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-group uploadSignature">
+                        <div class="row">
+                            <div class="col-md-4"><label class="control-label">Electronic Signature</label></div>
+                            <div class="col-md-8">
+                                <div class="form-control">
+                                    <input name="files"
+                                           type="file"
+                                           id="fileinput"
+                                           accept=".jpg, .png, .jpeg, .gif, .bmp"
+                                           k-multiple="false"
+                                           kendo-upload
+                                           k-async="{ saveUrl: '../File/Save', removeUrl: '../File/DeleteSiteLogo', autoUpload: true }"
+                                           k-select="onSelect"
+                                           k-success="onImageUploadSuccess" />
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="!(user.DigitalSignature==null || user.DigitalSignature==undefined)">
+                            <div class="row">
+                                <div class="col-md-4"><label class="control-label">Preview</label></div>
+                                <div class="col-md-8">
+                                    <img data-ng-src="data:image/png;base64,{{user.DigitalSignature}}" style="width:200px;height:60px; margin:0 0 0 14px;" width-based-height>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4"><label class="control-label" style="margin:14px 0 0 0px;">PIN</label></div>
+                            <div class="col-md-8"><input type="password" maxlength="4" ng-model="user.PIN" style="margin:14px 0 0 14px;" class="k-textbox" pattern="[0-9]{4}" /></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4"><label class="control-label" style="margin:14px 0 0 0px;">Confirm PIN</label></div>
+                            <div class="col-md-8"><input type="password" maxlength="4" ng-model="user.ConfirmPIN" style="margin:14px 0 0 14px;" class="k-textbox" pattern="[0-9]{4}" /></div>
+                        </div>
+
+                        @if (isChange == "true")
+                        {
+                            <div class="row">
+                                <div class="col-md-4"><label class="control-label" style="margin:14px 0 0 0px;">Password</label></div>
+                                <div class="col-md-8"><input type="password" ng-model="user.Password" style="margin:14px 0 0 14px;" class="k-textbox" /></div>
+                            </div>
+                        }
+                    </div>
+                    <div class="text-danger validation-summary-errors" data-valmsg-summary="true">
+                        <ul>
+                            @if (isChange == "true")
+                            {
+                                <li ng-show="pwIsEmpty&&submitted&&!isEmpty">{{passwordError}}</li>
+                            }
+                            else
+                            {
+                                <li ng-show="pwIsEmpty">{{passwordError}}</li>
+                            }
+                            <li ng-show="pinNotMatch||pinNot4Digits">{{pinError}}</li>
+                        </ul>
+                    </div>
+                    <div class="form-group">
+                        <div class="float_right" style="margin:40px 0 40px 0;">
+                            <input ng-disabled="isEmpty" type="button" ng-click="Save()" class="btn btn-default" value="Submit" />
+                        </div>
+                        <div class="float_right" style="margin:40px 5px 0 0;">
+                            <input type="button" value="Cancel" class="btn btn-default" onclick="location.href='@Url.Action("DigitalSignatureCancel", "Login")'" />
+                        </div>
+                        <div ng-if="!(user.DigitalSignature==null || user.DigitalSignature==undefined)" class="float_right" style="margin:40px 5px 0 0;">
+                            <input type="button" value="Remove Image" class="btn btn-default" ng-click="removeImage()" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="clear"></div>
+
+        </div>
+        <div class="clear"></div>
+
+    </div>
+
+
+    @Scripts.Render("~/bundles/kendo")
+</div>
+
+<style>
+    .k-upload-pct {
+        visibility: hidden;
+    }
+</style>

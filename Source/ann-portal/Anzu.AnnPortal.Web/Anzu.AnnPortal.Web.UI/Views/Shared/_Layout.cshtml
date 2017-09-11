@@ -1,0 +1,83 @@
+﻿@using System.Configuration
+@using Newtonsoft.Json
+@using Anzu.AnnPortal.Web.UI.Encryption
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Aesthetic Neural Network</title>
+    <link href="app/assets/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <base href="/Portal/">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="app/assets/images/ANN_Logo.png">
+    @Styles.Render("~/Content/vendor")
+    @Styles.Render("~/Content/css")
+
+    @{
+        EncryptionManager manager = new EncryptionManager();
+        string practiceId = null;
+        if (!string.IsNullOrEmpty(@ViewBag.PracticeId))
+        {
+            practiceId = manager.Encrypt(@ViewBag.PracticeId);
+        }
+        else
+        {
+            practiceId = manager.Encrypt("NULL");
+        }
+
+        string url = Request.Url.AbsoluteUri;
+        string dashboardId = url.Split('/').Last();
+        ViewBag.DashboardId = dashboardId;
+    }
+
+
+</head>
+<body ng-app="annPortalApp" layout="column">
+
+    <script>
+        var PRACTICE_ID = "@practiceId";
+        var USER_ROLE = "@ViewBag.UserRole";
+        var FIRST_NAME = "@ViewBag.FirstName";
+        var LAST_NAME = "@ViewBag.LastName";
+        var APP_VERSION = "@ViewContext.HttpContext.ApplicationInstance.GetType().BaseType.Assembly.GetName().Version.ToString()";
+        var CORE_SERVICE_DOMAIN = "@ViewBag.coreDomain";
+        var IDENTITY_DOMAIN = "@ViewBag.identityDomain";
+        var USER_ID = "@ViewBag.loginUserId";
+        var EMR_ID = "@ViewBag.emrId";
+
+        @*var CURRENT_USER = "@ViewBag.CurrentUser.UserName";
+        var PRACTICE_ID = "@practiceId";
+        var USER_ROLE = "@ViewBag.CurrentUserRoles";
+        var APP_VERSION = "@ViewContext.HttpContext.ApplicationInstance.GetType().BaseType.Assembly.GetName().Version.ToString()";*@
+    </script>
+    @RenderBody()
+    @Scripts.Render("~/bundles/vendor")
+    @*<script type="text/javascript">
+            window.Server = (function () {
+                return {
+                    user: {
+                        id: '@ViewBag.CurrentUser.Id',
+                        username: '@ViewBag.CurrentUser.UserName',
+                        email: '@ViewBag.CurrentUser.Email',
+                        roles: '@ViewBag.CurrentUserRoles',
+                        //practice: @JsonConvert.SerializeObject(ViewBag.CurrentUser.Practice)
+                    },
+                    site: { sitePrefix: '@ConfigurationManager.AppSettings["Core:SitePrefix"]' }
+                };
+            })();
+        </script>*@
+
+
+    @RenderSection("Scripts", required: false)
+
+    @*admin related*@
+
+    <script type="text/javascript">
+        @RenderSection("jsCode", required: false)
+    </script>
+
+</body>
+</html>

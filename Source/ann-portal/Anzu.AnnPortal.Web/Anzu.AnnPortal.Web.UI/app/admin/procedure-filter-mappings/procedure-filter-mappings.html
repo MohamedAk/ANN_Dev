@@ -1,0 +1,45 @@
+<div ng-include="'app/components/navbar/navbar.html'"></div>
+<style>
+    body {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .mCSB_scrollTools .mCSB_draggerContainer {
+        right: -60px;
+    }
+
+    .mCSB_1_dragger_vertical {
+        background: #f00;
+    }
+
+    .mCSB_dragger_bar {
+        border-radius: 0px !important;
+        width: 8px !important;
+    }
+</style>
+<div class="module-settings has-navbar">
+    <div class="breadcrumb">
+        <div class="breadcrumb-container row">
+            <!--<div class="col-xs-6" ng-show="vm.subTitle">
+                <span><a href="#/admin/procedure-filter-mappings/">Procedure Filter Mapping</a>&nbsp;<i class="fa fa-angle-right"></i></span>&nbsp;<span ng-if="vm.showEmrId">{{tempEmrId}}</span>
+            </div>-->
+            <div class="col-xs-6 text-right pull-right jump-to">
+                <!--Jump To : <a href="#/admin/practice-management">Practice Management</a>-->
+            </div>
+        </div>
+    </div>
+    <div class="settings-page">
+        <h1>{{vm.subTitle || 'Procedure Filter Mapping'}}</h1>
+        <br />
+        <div class="text-right" ng-if="vm.showCreateBtn">
+            <a class="button primary" href="#/admin/procedure-filter-mappings/new/editRelated" ng-click="save($event)">
+                <i class="fa fa-plus"></i> Create
+            </a>
+        </div>
+        <br />
+        <div class="group">
+            <ui-view />
+        </div>
+    </div>
+</div>

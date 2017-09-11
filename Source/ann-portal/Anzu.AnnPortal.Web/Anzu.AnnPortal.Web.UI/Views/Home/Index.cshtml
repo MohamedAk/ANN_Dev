@@ -1,0 +1,6 @@
+﻿<div ng-include="'app/components/slide-menu/slide-menu.html'"></div>
+<div layout="column" layout-align="stretch" class="no-print" ui-view ng-animate flex></div>
+@section Scripts{
+    @Scripts.Render("~/bundles/app")
+}
+<toaster-container toaster-options="{'time-out': 2000, 'close-button':true, 'animation-class': 'toast-top-right'}"></toaster-container>

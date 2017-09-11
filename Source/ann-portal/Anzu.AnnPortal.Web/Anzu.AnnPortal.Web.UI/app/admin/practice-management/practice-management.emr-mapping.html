@@ -1,0 +1,211 @@
+<style>
+    body {
+        /*overflow: hidden;*/
+        height: 100%;
+    }
+
+    .mCSB_scrollTools .mCSB_draggerContainer {
+        right: -60px;
+    }
+
+    .mCSB_1_dragger_vertical {
+        background: #f00;
+    }
+
+    .mCSB_dragger_bar {
+        border-radius: 0px !important;
+        width: 8px !important;
+    }
+
+    .k-grid-content {
+        overflow-y: visible;
+    }
+
+    .tooltip-inner {
+        max-width: 1000px;
+    }
+
+    .k-grid-content td {
+        padding: 0px !important;
+    }
+
+    label {
+        line-height: 24px;
+        margin-bottom: 0px;
+    }
+
+    div.radio {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    a.button {
+        margin-left: 0px;
+    }
+
+    .no-padding-left {
+        padding-left: 0px;
+    }
+
+    #emrMapping > .k-grid-content {
+        height: calc(100vh - 440px);
+        overflow-x: hidden;
+    }
+
+    .no-data-alert {
+        text-align: center;
+    }
+</style>
+<script>
+    var RECORD = 0;
+</script>
+<div id="emr-mapping" ng-controller="Admin.PracticeManagement.EmrMappingCtrl" ng-init="init();">
+    <div class="row">
+        <!--Left Pane-->
+        <div class="col-md-7">
+            <div class="col-md-12 no-padding-left">
+                <h4>Search For</h4>
+            </div>
+            <div class="col-md-7 no-padding-left">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label><input type="radio" name="searchOption" ng-model="search.option" value="1">EMR Service Name</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label><input type="radio" name="searchOption" ng-model="search.option" value="2">Procedure Name</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label><input type="radio" name="searchOption" ng-model="search.option" value="3">Product Name</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label><input type="radio" name="searchOption" ng-model="search.option" value="4">Company</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="row">
+                    <input type="text" class="form-control" id="contactName" placeholder="Search Text" ng-model="search.searchText" data-ng-keypress="onSearchInputKeyPress($event)">
+                </div>
+                <div class="row pull-right">
+                    <button type="button" class="btn btn-primary" ng-click="resetSearch();">Reset</button>
+                    <a class="button primary custom-margin" ng-click="searchData()">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--Right Pane-->
+        <div class="col-md-5">
+            <div class="col-md-12">
+                <h4>Sort By</h4>
+            </div>
+            <div class="col-md-6">
+                <div class="radio">
+                    <label><input type="radio" ng-model="sortOption" value="6" name="sortOption" ng-change="searchData()">Last Updated Date</label>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="radio">
+                    <label><input type="radio" ng-model="sortOption" value="1" name="sortOption" ng-change="searchData()">EMR Service Name</label>
+                </div>
+            </div>
+            <div class="col-md-6 col-xs-12">
+                <div class="radio">
+                    <label><input type="radio" ng-model="sortOption" value="2" name="sortOption" ng-change="searchData()">Procedure Name</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="radio">
+                    <label><input type="radio" ng-model="sortOption" value="3" name="sortOption" ng-change="searchData()">Product Name</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="radio">
+                    <label><input type="radio" ng-model="sortOption" value="4" name="sortOption" ng-change="searchData()">Status</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="radio">
+                    <label><input type="radio" ng-model="sortOption" value="5" name="sortOption" ng-change="searchData()">Unmapped</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form name="form.FormEmrMapping">
+        <div class="row no-gutter">
+            <div class="modifiedKendoGrid no-border">
+                <div kendo-grid="emrMapping" class="full-width fix-style" options="emrMappingGridOptions" id="emrMapping">
+
+                </div>
+            </div>
+        </div>
+        <div class="btn-bar" afkl-sticky-element="bottom">
+            <button class="" aria-label="Settings" href="#/admin/practice-management/" ng-click="cancel()">
+                Cancel
+            </button>
+            <button class="primary" aria-label="Settings" ng-disabled="isCubeProcessing || vm.newProcedureLevels.length == 0" ng-click="createPracticeProcedureList()">
+                Save
+            </button>
+        </div>
+    </form>
+
+    <modal title="Are You Sure?" visible="showModal" class="hide">
+        <div class="row" id="modal-body">
+            <p>There may be unsaved changes. <span ng-cloak>{{statusText}}</span></p>
+        </div>
+        <div class="row text-right">
+            <button class="btn btn-primary" type="button" ng-click="confirmYes()">Yes</button>
+            <button class="btn btn-warning" type="button" ng-click="confirmNo()">No</button>
+        </div>
+    </modal>
+    <!--
+    <procedure-modal id="procModal" title="Procedures" visible="showProcModal" class="hide">
+
+        <div class="row no-gutter">
+            <div class="col-xs-12">
+                <label>Search</label><input type="text" ng-model="procFilter" /><button ng-click="searchProc()">Search</button>
+                <div class="col-xs-12">
+                    <div id="procGrid" kendo-grid="grid" options="mainGridOptions" class="full_height fix-style">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </procedure-modal>
+    -->
+    <script type="text/ng-template" id="procModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Procedures</h3>
+        </div>
+        <div class="modal-body">
+            <div class="row no-gutter">
+                <div class="col-xs-12">
+                    <label class="col-xs-1">Search</label>
+                    <div class="col-xs-6"><input type="text" id="filterSearch" ng-keypress="enterPress($event)" /></div>
+                    <button ng-click="searchProc()">Search</button>
+                </div>
+                <div class="col-xs-12">
+                    <div id="procGrid" kendo-grid="grid" options="mainGridOptions" class="full_height fix-style">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <modal title="Cube Refresh" visible="showOkModal" class="hide" ng-cloak>
+        <div class="row" id="modal-body">
+            <p>Cube refresh is in progress. Save operation is not allowed</p>
+        </div>
+        <div class="row text-right">
+            <button class="btn btn-warning" type="button" ng-click="confirmNo()">OK</button>
+        </div>
+    </modal>
+</div>

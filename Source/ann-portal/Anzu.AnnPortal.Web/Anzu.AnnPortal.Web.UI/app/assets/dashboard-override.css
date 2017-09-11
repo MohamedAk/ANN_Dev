@@ -1,0 +1,613 @@
+﻿.dx-dashboard-splitter-pane .dx-dashboard-splitter-layout-place .dx-scrollable {
+    touch-action: none;
+}
+
+.dx-dashboard-splitter-layout-place {
+    top: 4rem !important;
+}
+
+.dx-datagrid .dx-row > td {
+    padding: 3px 7px;
+}
+
+body:not(.desktop-layout) .dx-dashboard-splitter-pane .dx-scrollable-native.dx-scrollable-scrollbar-simulated .dx-scrollable-scrollbar {
+    visibility: hidden;
+}
+
+body {
+    overflow-y: hidden !important;
+}
+
+#viewerContainer {
+    top: 40px !important;
+    /*overflow-y: hidden;*/
+}
+
+.filter-float #clearBtn#clearBtn {
+    background: #ca4646 !important;
+    bottom: 4.9rem !important;
+    transform: scale(1);
+    transition: all 600ms cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.show-filter #clearBtn#clearBtn {
+    transform: scale(0);
+}
+
+#filterBtn#filterBtn .filter-close {
+    display: none;
+}
+
+.show-filter #filterBtn#filterBtn .filter-close {
+    display: inline-block;
+}
+
+.show-filter #filterBtn#filterBtn .filter-open {
+    display: none;
+}
+
+.desktop-layout.filter-float #clearBtn {
+    right: 2rem;
+}
+
+.filter-float #clearBtn:hover {
+    opacity: 1;
+}
+
+.filter-float #clearBtn svg {
+    opacity: .8;
+}
+
+body,
+span:not(.dx-checkbox-icon) {
+    font-family: 'Open Sans' !important;
+}
+
+.dx-dashboard-loading {
+    display: none;
+}
+
+body.mobile-layout [data-layout-item-name="textBoxDashboardItem1"] table td:nth-child(2) span,
+body.mobile-layout [data-layout-item-name="textBoxDashboardItem1"] table td:nth-child(4) span,
+body.mobile-layout [data-layout-item-name="textBoxDashboardItem1"] table td:nth-child(6) span,
+body.mobile-layout [data-layout-item-name="textBoxDashboardItem2"] table td:nth-child(2) span,
+body.mobile-layout [data-layout-item-name="textBoxDashboardItem2"] table td:nth-child(4) span,
+body.mobile-layout [data-layout-item-name="textBoxDashboardItem2"] table td:nth-child(6) span {
+    font-size: 1.04em;
+}
+
+body.mobile-layout .dx-dashboard-splitter-h-separator {
+    visibility: hidden;
+}
+
+body.mobile-layout .dx-scrollable-container {
+    overflow: hidden !important;
+}
+
+body.mobile-layout .dx-viewer-item-table tr:first-child td:first-child {
+    height: 60px;
+}
+
+    body.mobile-layout .dx-viewer-item-table tr:first-child td:first-child #textBoxDashboardItem1,
+    body.mobile-layout .dx-viewer-item-table tr:first-child td:first-child .dx-dashboard-item,
+    body.mobile-layout .dx-viewer-item-table tr:first-child td:first-child [data-layout-item-name="textBoxDashboardItem1"],
+    body.mobile-layout .dx-viewer-item-table tr:first-child td:first-child [data-layout-item-name="textBoxDashboardItem2"] {
+        height: 100% !important;
+    }
+
+.filters-loaded #ASPxDashboardViewer1,
+.filters-loaded .dx-dashboard-viewer {
+    /*override*/
+    height: auto !important;
+}
+
+[data-layout-item-name*=cardDashboardItem] .widget-viewer-table {
+    margin: auto !important;
+}
+
+.dx-dashboard-title {
+    margin-top: -0.6em;
+}
+
+.dx-dashboard-title-text {
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+
+.dx-dashboard-title-filter-image {
+    display: inline-block;
+    margin-top: -0.2rem;
+    margin-left: .4rem;
+    opacity: .5;
+}
+
+    .dx-dashboard-title-filter-image:hover {
+        opacity: 1;
+    }
+/*CRITICAL*/
+span.dx-dashboard-title-filter-image {
+    display: none !important;
+}
+
+body:not(.desktop-layout) .dx-dashboard-splitter-h-separator {
+    visibility: hidden;
+}
+
+.dx-cardItem .dx-card-title {
+    font-family: 'Open Sans' !important;
+    font-weight: 200 !important;
+    opacity: .7;
+}
+
+.dx-datagrid .dx-datagrid-rowsview {
+    position: relative;
+    border-top: 1px solid #b3aab8;
+    top: -1px;
+}
+
+    .dx-datagrid .dx-datagrid-rowsview .filter-hide {
+        display: none;
+    }
+
+.dx-datagrid .dx-datagrid-headers .dx-header-row td {
+    text-align: center;
+    color: #fff;
+    background: rgba(160, 149, 167, 0.8) !important;
+}
+
+    .dx-datagrid .dx-datagrid-headers .dx-header-row td .dx-datagrid-text-content {
+        font-size: 12px;
+    }
+
+.dx-datagrid .dx-row-alt > td {
+    background: #f5f5f5;
+}
+
+.dx-datagrid .filter-search input[type=text] {
+    width: 100%;
+    display: block;
+    border: solid 0 #ccc;
+    padding: 3px 7px;
+    font-size: 12px;
+}
+
+[data-layout-item-name] .dx-dashboard-item-header-text-caption {
+    font-weight: 300;
+}
+
+.dx-dashboard-splitter-pane {
+    border-radius: 2px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.dx-dashboard-splitter-v-separator {
+    width: 10px !important;
+}
+
+.dx-dashboard-splitter-h-separator {
+    height: 10px !important;
+}
+
+[data-layout-item-name="textBoxDashboardItem1"],
+[data-layout-item-name="textBoxDashboardItem2"] {
+    height: 35px !important;
+}
+
+    [data-layout-item-name="textBoxDashboardItem1"] *,
+    [data-layout-item-name="textBoxDashboardItem2"] * {
+        color: #5d5d5d !important;
+    }
+
+    [data-layout-item-name="textBoxDashboardItem1"] #textBoxDashboardItem1,
+    [data-layout-item-name="textBoxDashboardItem2"] #textBoxDashboardItem1,
+    [data-layout-item-name="textBoxDashboardItem1"] #textBoxDashboardItem2,
+    [data-layout-item-name="textBoxDashboardItem2"] #textBoxDashboardItem2 {
+        height: 10px;
+    }
+
+        [data-layout-item-name="textBoxDashboardItem1"] #textBoxDashboardItem1 > p,
+        [data-layout-item-name="textBoxDashboardItem2"] #textBoxDashboardItem1 > p,
+        [data-layout-item-name="textBoxDashboardItem1"] #textBoxDashboardItem2 > p,
+        [data-layout-item-name="textBoxDashboardItem2"] #textBoxDashboardItem2 > p {
+            display: none;
+        }
+
+    [data-layout-item-name="textBoxDashboardItem1"] table,
+    [data-layout-item-name="textBoxDashboardItem2"] table {
+        display: inline-block;
+        table-layout: auto;
+        width: auto;
+    }
+
+        [data-layout-item-name="textBoxDashboardItem1"] table td,
+        [data-layout-item-name="textBoxDashboardItem2"] table td {
+            text-transform: uppercase;
+            color: #333;
+            border: none;
+            width: auto;
+            padding-right: 1rem;
+        }
+
+            [data-layout-item-name="textBoxDashboardItem1"] table td:nth-child(1) span,
+            [data-layout-item-name="textBoxDashboardItem2"] table td:nth-child(1) span,
+            [data-layout-item-name="textBoxDashboardItem1"] table td:nth-child(3) span,
+            [data-layout-item-name="textBoxDashboardItem2"] table td:nth-child(3) span,
+            [data-layout-item-name="textBoxDashboardItem1"] table td:nth-child(5) span,
+            [data-layout-item-name="textBoxDashboardItem2"] table td:nth-child(5) span {
+                opacity: .9;
+                line-height: 2.5em;
+                font-size: .9em;
+                font-weight: 400;
+            }
+
+            [data-layout-item-name="textBoxDashboardItem1"] table td:nth-child(2),
+            [data-layout-item-name="textBoxDashboardItem2"] table td:nth-child(2),
+            [data-layout-item-name="textBoxDashboardItem1"] table td:nth-child(4),
+            [data-layout-item-name="textBoxDashboardItem2"] table td:nth-child(4),
+            [data-layout-item-name="textBoxDashboardItem1"] table td:nth-child(6),
+            [data-layout-item-name="textBoxDashboardItem2"] table td:nth-child(6) {
+                padding-right: 2rem;
+            }
+
+                [data-layout-item-name="textBoxDashboardItem1"] table td:nth-child(2) span,
+                [data-layout-item-name="textBoxDashboardItem2"] table td:nth-child(2) span,
+                [data-layout-item-name="textBoxDashboardItem1"] table td:nth-child(4) span,
+                [data-layout-item-name="textBoxDashboardItem2"] table td:nth-child(4) span,
+                [data-layout-item-name="textBoxDashboardItem1"] table td:nth-child(6) span,
+                [data-layout-item-name="textBoxDashboardItem2"] table td:nth-child(6) span {
+                    font-size: 1.5em;
+                }
+
+    [data-layout-item-name="textBoxDashboardItem1"] p span,
+    [data-layout-item-name="textBoxDashboardItem2"] p span {
+        font-size: 13px;
+        font-weight: 300;
+    }
+
+body:not(.filters-loaded) .filter-float [data-layout-item-name="dashboardItemGroup2"],
+body:not(.filters-loaded) .filter-float [data-layout-item-name="dashboardItemGroup1"] {
+    display: none !important;
+}
+
+body:not(.filters-loaded) [data-layout-item-name="dashboardItemGroup2"],
+body:not(.filters-loaded) [data-layout-item-name="dashboardItemGroup1"] {
+    display: none !important;
+}
+
+.dx-dashboard-item-header-text-caption {
+    color: #5d5d5d !important;
+}
+
+.dx-db-toolbar-internal {
+    opacity: .4;
+}
+
+    .dx-db-toolbar-internal:hover {
+        opacity: 1;
+    }
+
+.filter-float [data-layout-item-name="dashboardItemGroup2"],
+.filter-float [data-layout-item-name="dashboardItemGroup1"] {
+    transition: all 370ms cubic-bezier(0.42, 0, 0.58, 1);
+    transition-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+    transform: translate3d(100vw, 0px, 0px);
+    opacity: 0;
+    display: block;
+    padding: 0 !important;
+    background: #eee !important;
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    right: 2rem;
+    bottom: 2rem;
+    background: #fff;
+    z-index: 99999;
+    border: 1px solid #ccc;
+    width: auto !important;
+    height: auto !important;
+    border-radius: .2rem;
+    padding: .5rem;
+    border: none;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+}
+
+    .filter-float [data-layout-item-name="dashboardItemGroup2"] .dx-dashboard-item-header-text-caption,
+    .filter-float [data-layout-item-name="dashboardItemGroup1"] .dx-dashboard-item-header-text-caption {
+        color: #5d5d5d !important;
+    }
+
+    .filter-float [data-layout-item-name="dashboardItemGroup2"] > .dx-dashboard-item-header .dx-dashboard-item-header-text-caption,
+    .filter-float [data-layout-item-name="dashboardItemGroup1"] > .dx-dashboard-item-header .dx-dashboard-item-header-text-caption {
+        font-size: 1.2em;
+    }
+
+    .filter-float [data-layout-item-name="dashboardItemGroup2"] > .dx-dashboard-item-header .dx-dashboard-item-toolbar,
+    .filter-float [data-layout-item-name="dashboardItemGroup1"] > .dx-dashboard-item-header .dx-dashboard-item-toolbar {
+        display: none;
+    }
+
+    .filter-float [data-layout-item-name="dashboardItemGroup2"] > .dx-dashboard-item-header div,
+    .filter-float [data-layout-item-name="dashboardItemGroup1"] > .dx-dashboard-item-header div,
+    .filter-float [data-layout-item-name="dashboardItemGroup2"] > .dx-dashboard-item-header span,
+    .filter-float [data-layout-item-name="dashboardItemGroup1"] > .dx-dashboard-item-header span {
+        color: white !important;
+        background: #8f2040;
+    }
+
+    .filter-float [data-layout-item-name="dashboardItemGroup2"] > .dx-dashboard-group-item,
+    .filter-float [data-layout-item-name="dashboardItemGroup1"] > .dx-dashboard-group-item {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        background: #eee;
+    }
+
+        .filter-float [data-layout-item-name="dashboardItemGroup2"] > .dx-dashboard-group-item .dx-dashboard-splitter-v-separator,
+        .filter-float [data-layout-item-name="dashboardItemGroup1"] > .dx-dashboard-group-item .dx-dashboard-splitter-v-separator {
+            width: 0 !important;
+        }
+
+        .filter-float [data-layout-item-name="dashboardItemGroup2"] > .dx-dashboard-group-item .dx-dashboard-splitter-h-separator,
+        .filter-float [data-layout-item-name="dashboardItemGroup1"] > .dx-dashboard-group-item .dx-dashboard-splitter-h-separator {
+            height: 0 !important;
+        }
+
+        .filter-float [data-layout-item-name="dashboardItemGroup2"] > .dx-dashboard-group-item .dx-dashboard-splitter-pane-empty,
+        .filter-float [data-layout-item-name="dashboardItemGroup1"] > .dx-dashboard-group-item .dx-dashboard-splitter-pane-empty {
+            padding: 4px;
+        }
+
+            .filter-float [data-layout-item-name="dashboardItemGroup2"] > .dx-dashboard-group-item .dx-dashboard-splitter-pane-empty .dx-dashboard-group-item-child,
+            .filter-float [data-layout-item-name="dashboardItemGroup1"] > .dx-dashboard-group-item .dx-dashboard-splitter-pane-empty .dx-dashboard-group-item-child {
+                background: #fff;
+                border-radius: 2px !important;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+            }
+
+            .filter-float [data-layout-item-name="dashboardItemGroup2"] > .dx-dashboard-group-item .dx-dashboard-splitter-pane-empty .dx-list-border-visible,
+            .filter-float [data-layout-item-name="dashboardItemGroup1"] > .dx-dashboard-group-item .dx-dashboard-splitter-pane-empty .dx-list-border-visible {
+                border: none;
+            }
+
+                .filter-float [data-layout-item-name="dashboardItemGroup2"] > .dx-dashboard-group-item .dx-dashboard-splitter-pane-empty .dx-list-border-visible .dx-list-select-all,
+                .filter-float [data-layout-item-name="dashboardItemGroup1"] > .dx-dashboard-group-item .dx-dashboard-splitter-pane-empty .dx-list-border-visible .dx-list-select-all,
+                .filter-float [data-layout-item-name="dashboardItemGroup2"] > .dx-dashboard-group-item .dx-dashboard-splitter-pane-empty .dx-treeview .dx-treeview-select-all-item,
+                .filter-float [data-layout-item-name="dashboardItemGroup1"] > .dx-dashboard-group-item .dx-dashboard-splitter-pane-empty .dx-treeview .dx-treeview-select-all-item {
+                    border-bottom: 1px solid rgba(211, 211, 211, 0.4);
+                }
+
+    .filter-float [data-layout-item-name="dashboardItemGroup2"] .dx-checkbox-indeterminate .dx-checkbox-icon:before,
+    .filter-float [data-layout-item-name="dashboardItemGroup1"] .dx-checkbox-indeterminate .dx-checkbox-icon:before {
+        left: 1px;
+        top: 1px;
+    }
+
+    .filter-float [data-layout-item-name="dashboardItemGroup2"] > .dx-dashboard-group-item,
+    .filter-float [data-layout-item-name="dashboardItemGroup1"] > .dx-dashboard-group-item {
+        overflow-x: hidden;
+    }
+
+    .filter-float [data-layout-item-name="dashboardItemGroup2"] .dx-checkbox-icon,
+    .filter-float [data-layout-item-name="dashboardItemGroup1"] .dx-checkbox-icon {
+        width: 16px;
+        height: 16px;
+        font-size: 10px;
+    }
+
+.desktop-layout.filter-float [data-layout-item-name="dashboardItemGroup2"],
+.desktop-layout.filter-float [data-layout-item-name="dashboardItemGroup1"] {
+    transform: translate3d(110%, 0px, 0px);
+}
+
+.show-filter.filter-float [data-layout-item-name="dashboardItemGroup2"],
+.show-filter.filter-float [data-layout-item-name="dashboardItemGroup1"] {
+    transform: translate3d(0, 0px, 0px);
+    opacity: 1;
+}
+
+.desktop-layout.filter-float [data-layout-item-name="dashboardItemGroup2"],
+.desktop-layout.filter-float [data-layout-item-name="dashboardItemGroup1"] {
+    right: 3rem;
+}
+
+.filter-float [data-layout-item-name="dashboardItemGroup2"] [data-layout-item-name="treeViewDashboardItem1"],
+.filter-float [data-layout-item-name="dashboardItemGroup1"] [data-layout-item-name="treeViewDashboardItem1"] {
+    height: auto !important;
+}
+
+    .filter-float [data-layout-item-name="dashboardItemGroup2"] [data-layout-item-name="treeViewDashboardItem1"] .dx-dashboard-item,
+    .filter-float [data-layout-item-name="dashboardItemGroup1"] [data-layout-item-name="treeViewDashboardItem1"] .dx-dashboard-item {
+        height: auto !important;
+    }
+
+.filter-float [data-layout-item-name="dashboardItemGroup2"] .dx-dashboard-group-item,
+.filter-float [data-layout-item-name="dashboardItemGroup1"] .dx-dashboard-group-item {
+    height: 95% !important;
+    overflow-y: auto;
+}
+
+.filter-float [data-layout-item-name="dashboardItemGroup2"] .dx-dashboard-item.dx-dashboard-group-item table,
+.filter-float [data-layout-item-name="dashboardItemGroup1"] .dx-dashboard-item.dx-dashboard-group-item table {
+    width: 100% !important;
+}
+
+.filter-float [data-layout-item-name="dashboardItemGroup2"] .dx-dashboard-splitter-pane-empty > div,
+.filter-float [data-layout-item-name="dashboardItemGroup1"] .dx-dashboard-splitter-pane-empty > div,
+.filter-float [data-layout-item-name="dashboardItemGroup2"] .dx-dashboard-splitter-h-separator > div,
+.filter-float [data-layout-item-name="dashboardItemGroup1"] .dx-dashboard-splitter-h-separator > div {
+    width: 100% !important;
+}
+
+.filter-float #filterBtn,
+.filter-float #clearBtn {
+    position: fixed;
+    opacity: 0.5;
+    bottom: 1rem;
+    right: 1rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1.5rem;
+    border: none;
+    z-index: 99999999999;
+    display: block;
+    outline: none;
+    background: #008C69 !important;
+    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.7), 0 0px 3px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    border: 2px rgba(255, 255, 255, 0.73) solid;
+}
+
+.desktop-layout.filter-float #filterBtn,
+.desktop-layout.filter-float #clearBtn {
+    right: 2rem;
+}
+
+.filter-float #filterBtn svg,
+.filter-float #clearBtn svg {
+    opacity: .8;
+}
+
+.filter-float #filterBtn:active,
+.filter-float #clearBtn:active {
+    opacity: .9;
+    box-shadow: none;
+}
+
+#filterBtn {
+    display: none;
+}
+
+.filter-backdrop {
+    position: fixed;
+    bottom: 100%;
+    right: 0;
+    left: 0;
+    top: 0;
+    background: #212121;
+    z-index: 99999;
+    opacity: 0;
+    transition: opacity 370ms ease-out, height 0ms ease-out;
+}
+
+.show-filter .filter-backdrop {
+    opacity: .48;
+    bottom: 0;
+    height: 400%;
+    transition: opacity 370ms ease-out, height 370ms ease-out;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('/Portal/fonts/OpenSans/OpenSans-Bold-webfont.eot');
+    src: url('/Portal/fonts/OpenSans/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'), url('/Portal/fonts/OpenSans/OpenSans-Bold-webfont.woff') format('woff'), url('/Portal/fonts/OpenSans/OpenSans-Bold-webfont.ttf') format('truetype'), url('/Portal/fonts/OpenSans/OpenSans-Bold-webfont.svg#open_sansbold') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('/Portal/fonts/OpenSans/OpenSans-BoldItalic-webfont.eot');
+    src: url('/Portal/fonts/OpenSans/OpenSans-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'), url('/Portal/fonts/OpenSans/OpenSans-BoldItalic-webfont.woff') format('woff'), url('/Portal/fonts/OpenSans/OpenSans-BoldItalic-webfont.ttf') format('truetype'), url('/Portal/fonts/OpenSans/OpenSans-BoldItalic-webfont.svg#open_sansbold_italic') format('svg');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('/Portal/fonts/OpenSans/OpenSans-ExtraBold-webfont.eot');
+    src: url('/Portal/fonts/OpenSans/OpenSans-ExtraBold-webfont.eot?#iefix') format('embedded-opentype'), url('/Portal/fonts/OpenSans/OpenSans-ExtraBold-webfont.woff') format('woff'), url('/Portal/fonts/OpenSans/OpenSans-ExtraBold-webfont.ttf') format('truetype'), url('/Portal/fonts/OpenSans/OpenSans-ExtraBold-webfont.svg#open_sansextrabold') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('/Portal/fonts/OpenSans/OpenSans-ExtraBoldItalic-webfont.eot');
+    src: url('/Portal/fonts/OpenSans/OpenSans-ExtraBoldItalic-webfont.eot?#iefix') format('embedded-opentype'), url('/Portal/fonts/OpenSans/OpenSans-ExtraBoldItalic-webfont.woff') format('woff'), url('/Portal/fonts/OpenSans/OpenSans-ExtraBoldItalic-webfont.ttf') format('truetype'), url('/Portal/fonts/OpenSans/OpenSans-ExtraBoldItalic-webfont.svg#open_sansextrabold_italic') format('svg');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('/Portal/fonts/OpenSans/OpenSans-Italic-webfont.eot');
+    src: url('/Portal/fonts/OpenSans/OpenSans-Italic-webfont.eot?#iefix') format('embedded-opentype'), url('/Portal/fonts/OpenSans/OpenSans-Italic-webfont.woff') format('woff'), url('/Portal/fonts/OpenSans/OpenSans-Italic-webfont.ttf') format('truetype'), url('/Portal/fonts/OpenSans/OpenSans-Italic-webfont.svg#open_sansitalic') format('svg');
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('/Portal/fonts/OpenSans/OpenSans-Light-webfont.eot');
+    src: url('/Portal/fonts/OpenSans/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'), url('/Portal/fonts/OpenSans/OpenSans-Light-webfont.woff') format('woff'), url('/Portal/fonts/OpenSans/OpenSans-Light-webfont.ttf') format('truetype'), url('/Portal/fonts/OpenSans/OpenSans-Light-webfont.svg#open_sanslight') format('svg');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('/Portal/fonts/OpenSans/OpenSans-LightItalic-webfont.eot');
+    src: url('/Portal/fonts/OpenSans/OpenSans-LightItalic-webfont.eot?#iefix') format('embedded-opentype'), url('/Portal/fonts/OpenSans/OpenSans-LightItalic-webfont.woff') format('woff'), url('/Portal/fonts/OpenSans/OpenSans-LightItalic-webfont.ttf') format('truetype'), url('/Portal/fonts/OpenSans/OpenSans-LightItalic-webfont.svg#open_sanslight_italic') format('svg');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('/Portal/fonts/OpenSans/OpenSans-Regular-webfont.eot');
+    src: url('/Portal/fonts/OpenSans/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'), url('/Portal/fonts/OpenSans/OpenSans-Regular-webfont.woff') format('woff'), url('/Portal/fonts/OpenSans/OpenSans-Regular-webfont.ttf') format('truetype'), url('/Portal/fonts/OpenSans/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('/Portal/fonts/OpenSans/OpenSans-Semibold-webfont.eot');
+    src: url('/Portal/fonts/OpenSans/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'), url('/Portal/fonts/OpenSans/OpenSans-Semibold-webfont.woff') format('woff'), url('/Portal/fonts/OpenSans/OpenSans-Semibold-webfont.ttf') format('truetype'), url('/Portal/fonts/OpenSans/OpenSans-Semibold-webfont.svg#open_sanssemibold') format('svg');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('/Portal/fonts/OpenSans/OpenSans-SemiboldItalic-webfont.eot');
+    src: url('/Portal/fonts/OpenSans/OpenSans-SemiboldItalic-webfont.eot?#iefix') format('embedded-opentype'), url('/Portal/fonts/OpenSans/OpenSans-SemiboldItalic-webfont.woff') format('woff'), url('/Portal/fonts/OpenSans/OpenSans-SemiboldItalic-webfont.ttf') format('truetype'), url('/Portal/fonts/OpenSans/OpenSans-SemiboldItalic-webfont.svg#open_sanssemibold_italic') format('svg');
+    font-weight: 300;
+    font-style: italic;
+}
+
+.filter-pane .dx-dashboard-group-item table.dx-viewer-item-table td table td:nth-child(3) {
+    width: 20% !important;
+}
+
+.dx-scrollable-scroll {
+    width: 10px !important;
+}
+
+::-webkit-scrollbar {
+    width: 7px !important;
+}
+
+div.dx-scrollable-container {
+    overflow-x: hidden !important;
+}
+
+.dx-item, .dx-list-item-content {
+    font-family: 'Open Sans' !important;
+}
+
+.dx-list-select-all {
+    font-size: 14px;
+    font-family: 'Open Sans' !important;
+}
+
+tr.dx-data-row {
+    height: 22px;
+}
+
+.hideRow {
+    display: none !important;
+}
+
+div.dx-datagrid-rowsview {
+    min-height: 126px;
+}

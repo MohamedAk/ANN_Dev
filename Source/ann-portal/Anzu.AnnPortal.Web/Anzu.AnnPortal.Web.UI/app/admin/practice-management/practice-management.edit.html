@@ -1,0 +1,344 @@
+<style>
+    body {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .mCSB_scrollTools .mCSB_draggerContainer {
+        right: -60px;
+    }
+
+    .mCSB_1_dragger_vertical {
+        background: #f00;
+    }
+
+    .mCSB_dragger_bar {
+        border-radius: 0px !important;
+        width: 8px !important;
+    }
+
+    .afkl-sticky-element.custom-sticky {
+        position: fixed;
+        bottom: 0px;
+        z-index: 58;
+    }
+
+    div.custom-grid-margin-top {
+        margin-top: 10px;
+    }
+
+    div.custom-font-sm {
+        font-size: 0.95em;
+    }
+
+    .custom-margin-top {
+        margin-top: 5px;
+    }
+
+    .custom-wrap-text {
+        word-wrap: break-word;
+    }
+</style>
+<div practice-list="223" id="practice-management-edit">
+
+    <form name="practiceForm" ng-init="init()" novalidate ng-cloak>
+
+        <div class="row">
+            <div class="col-xs-5">
+                <h4>Practice Information</h4>
+                <br>
+                <div class="row" ng-class="{ 'hasError' : practiceForm.$submitted && practiceForm.practiceName.$error.required}">
+                    <label class="col-xs-4">EMR Id</label>
+                    <div class="col-xs-6">
+                        <label>{{vm.practice.emrId}}</label>
+                    </div>
+                </div>
+                <br>
+                <div class="row" ng-class="{ 'hasError' : practiceForm.$submitted && practiceForm.practiceName.$error.required}">
+                    <label class="col-xs-4">Name*</label>
+                    <div class="col-xs-8">
+                        <input type="text" maxlength="150" name="practiceName" required ng-model="vm.practice.name" ng-change="chkPracticeNameUnique(vm.practice.name)" no-special-char>
+                        <span class="errorDescription" ng-show="practiceForm.$submitted && practiceForm.practiceName.$error.required">Practice Name cannot be empty.</span>
+                        <span class="errorDescription" ng-show="vm.isPracticeNameUnique">Practice name already exists in the system. Please specifiy a different name.</span>
+                    </div>
+                </div>
+                <br>
+                <div class="row" ng-class="{ 'hasError' : practiceForm.$submitted && practiceForm.addressLine1.$error.required}">
+                    <label class="col-xs-4">Address Line 1*</label>
+                    <div class="col-xs-8">
+                        <input type="text" maxlength="200" name="addressLine1" required ng-model="vm.practice.addressLine1">
+                        <span class="errorDescription" ng-show="practiceForm.$submitted && practiceForm.addressLine1.$error.required">Address Line 1 cannot be empty.</span>
+
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <label class="col-xs-4">Address Line 2</label>
+                    <div class="col-xs-8">
+                        <input type="text" maxlength="200" ng-model="vm.practice.addressLine2">
+                    </div>
+                </div>
+                <br>
+                <div class="row" ng-class="{ 'hasError' : practiceForm.$submitted && practiceForm.city.$error.required}">
+                    <label class="col-xs-4">City*</label>
+                    <div class="col-xs-8">
+                        <input type="text" maxlength="35" name="city" required ng-model="vm.practice.city">
+                        <span class="errorDescription" ng-show="practiceForm.$submitted && practiceForm.city.$error.required">City cannot be empty.</span>
+                    </div>
+                </div>
+                <br>
+                <div class="row" ng-class="{ 'hasError' : (practiceForm.$submitted  && (isEmpty(vm.practice.state) || vm.practice.state.name == 'Select a State Code..'))}">
+                    <label class="col-xs-4">State* </label>
+                    <div class="col-xs-8">
+                        <select kendo-drop-down-list
+                                k-option-label="'Select a State Code..'"
+                                k-ng-model="vm.practice.state"
+                                k-data-text-field="'name'"
+                                k-data-value-field="'id'"
+                                k-data-source="stateDataSource"
+                                name="state"></select>
+                        <span class="errorDescription" ng-show="practiceForm.$submitted  && (isEmpty(vm.practice.state) || vm.practice.state.name == 'Select a State Code..')">State cannot be empty.</span>
+
+                    </div>
+                </div>
+                <br>
+                <div class="row" ng-class="{ 'hasError' : (practiceForm.$submitted  && (isEmpty(vm.practice.zipCode) || vm.practice.zipCode.code == 'Select a Zip Code..'))}">
+                    <label class="col-xs-4">Zip Code* </label>
+                    <div class="col-xs-8">
+                        <input kendo-drop-down-list id="zip-code"
+                               k-option-label="'Select a Zip Code..'"
+                               k-ng-model="vm.practice.zipCode"
+                               k-data-text-field="'code'"
+                               k-data-value-field="'id'"
+                               k-filter="'contains'"
+                               k-auto-bind="false"
+                               k-data-source="zipCodeDatasource"
+                               name="zip" />
+
+                        <span class="errorDescription" ng-show="practiceForm.$submitted  && (isEmpty(vm.practice.zipCode) || vm.practice.zipCode.code == 'Select a Zip Code..')">Zip Code cannot be empty.</span>
+
+
+                    </div>
+
+                </div>
+                <br>
+                <div class="row" ng-class="{ 'hasError' : practiceForm.$submitted  && practiceForm.contactPerson.$error.required}">
+                    <label class="col-xs-4">Contact Person*</label>
+                    <div class="col-xs-8">
+                        <input type="text" maxlength="70" name="contactPerson" required ng-model="vm.practice.contactPerson">
+                        <span class="errorDescription" ng-show="practiceForm.$submitted  && practiceForm.contactPerson.$error.required">Contact Person cannot be empty.</span>
+
+                    </div>
+                </div>
+                <br>
+                <div class="row" ng-class="{ 'hasError' : ((practiceForm.$submitted && practiceForm.contactNumber.$error.required) || vm.isValidContactNumber)}" ng-class="{ 'hasError' : ((practiceForm.$submitted && practiceForm.contactNumber.$error.required) || vm.isValidContactNumber)}">
+                    <label class="col-xs-4">Contact No* </label>{{isValidContactNumber}}
+                    <div class="col-xs-8">
+                        <input type="text" kendo-masked-text-box k-mask="'000-000-0000'" name="contactNumber" ng-change="isValidContactNo(vm.practice.contactNumber)" ng-minlength='{{vm.practice.contactNumber.minlength}}' required ng-model="vm.practice.contactNumber">
+                        <span class="errorDescription" ng-show="practiceForm.$submitted && practiceForm.contactNumber.$error.required">Contact No cannot be empty.</span>
+                        <span class="errorDescription" ng-show="vm.isValidContactNumber">Please enter valid phone number.</span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-7">
+                <h4>Practice Users</h4>
+                <br>
+                <div class="row" ng-class="{ 'hasError' : vm.isUserAlreadyExsist}">
+                    <div class="col-xs-9">
+
+                        <input kendo-drop-down-list="practiceUserDropdown" id="practiceUser"
+                               k-option-label="'Select Practice Users ...'"
+                               k-data-text-field="'displayName'" ,
+                               k-data-value-field="'id'"
+                               k-data-source="userSearchDatasource"
+                               k-ng-model="vm.practiceUser"
+                               k-filter="'contains'"
+                               k-min-length="3"
+                               name="zip"
+                               required />
+                    </div>
+
+                    <div class="col-xs-3">
+                        <button type="button" title="Add" class="icon-no-border" aria-label="Settings" ng-disabled="isEmpty(vm.practiceUser)" ng-click="addPracticeUser(vm.practiceUser)">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                        <!--<button type="button" title="Create User" class="icon-no-border" aria-label="Settings" ng-click="toggleModal('true')">
+                            <i class="fa fa-user-plus"></i>
+                        </button>-->
+                        <a class="button primary" ng-click="toggleModal('true')">
+                            <i class="fa fa-plus"></i> Create
+                        </a>
+                    </div>
+                    <div class="col-xs-12">
+                        <span class="errorDescription" ng-show="vm.isUserAlreadyExsist">User already assigned to practice.</span>
+                        <span class="errorDescription" ng-show="vm.isUserASAPUser">User is already assigned to ASAP role.</span>
+                    </div><div class="col-xs-2"></div>
+
+                </div>
+                <div>
+                    <div class="row custom-font-sm">
+                        <div class="col-xs-12 margin-top-10">
+                            <div class="row" ng-hide="practiceUser.RecordStatusId == 2">
+                                <div class="col-xs-4"><strong>User ID</strong></div>
+                                <div class="col-xs-4"><strong>Name</strong></div>
+                                <div class="col-xs-1">&nbsp;</div>
+                                <div class="col-xs-3"><!--Leave blank space--></div>
+                            </div>
+                            <div class="row" ng-repeat="practiceUser in vm.practice.practiceUserList track by $index" ng-hide="practiceUser.RecordStatusId == 2">
+                                <div class="col-xs-4 custom-grid-margin-top custom-wrap-text">{{practiceUser.userName}}</div>
+                                <div class="col-xs-4 custom-grid-margin-top custom-wrap-text">{{practiceUser.displayName}}</div>
+                                <div class="col-xs-1">&nbsp;</div>
+                                <div class="col-xs-3">
+                                    <button title="Remove" type="button" class="icon-no-border" aria-label="Settings" ng-click="removePracticeUser($index)">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                    <!--<a class="button primary" ng-if="practiceUser.userStatusDisplay1='Active'" ng-click="ActivateUser(practiceUser.userName)">
+                                        <i class="fa fa-eye-slash"></i> Activate
+                                    </a>
+                                    <a class="button primary" ng-if="practiceUser.userStatusDisplay=='Active'" ng-click="DeactivateUser(practiceUser.userName)">
+                                        <i class="fa fa-eye-slash"></i> Deactivate
+                                    </a>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <h4>Breast Implant Information</h4>
+                <br>
+                <div class="row" ng-class="{ 'hasError' : vm.isValidDate || vm.isValidProdcutWithRange || vm.isProdcutEmpty || vm.isBreastImplantDateRangeSelected}">
+                    <div class="col-xs-6">
+                        <label>Name</label>
+
+                        <input kendo-drop-down-list id="drpdwn-aip-code"
+                               k-option-label="'Select Product ...'"
+                               k-data-text-field="'name'"
+                               k-data-value-field="'id'"
+                               k-data-source="productListDataSource"
+                               k-ng-model="vm.breastImplant.brestImplant"
+                               k-filter="'contains'"
+                               k-min-length="3"
+                               k-on-change="isValidBreastInPlant(vm.breastImplant)"
+                               name="prodcut" />
+                    </div>
+                    <div class="col-xs-3">
+                        <label class="col-xs-1">From</label>
+                        <input kendo-date-picker ng-model="vm.breastImplant.fromDate" k-options="{parseFormats:['yyyy-MM-dd'], format:'MM/dd/yyyy', }" style="width: 120%;" ng-change="isValidFromAndToDate(vm.breastImplant.fromDate,vm.breastImplant.toDate); isValidBreastInPlant(vm.breastImplant)" />
+
+                    </div>
+
+                    <!--<div class="col-xs-3">
+                        <label class="col-xs-1">To</label>
+                        <input kendo-date-picker ng-model="vm.breastImplant.toDate" k-options="{parseFormats:['yyyy-MM-dd'], format:'MM/dd/yyyy', }" style="width: 120%;" ng-change="isValidFromAndToDate(vm.breastImplant.fromDate,vm.breastImplant.toDate); isValidBreastInPlant(vm.breastImplant)" />
+
+                    </div>-->
+                    <div class="col-xs-1">
+                        <button title="Add" type="button" class="icon-no-border" aria-label="Settings" ng-disabled="vm.isValidDate || vm.isProdcutEmpty || vm.isBreastImplantDateRangeSelected" ng-click="addBreastImplant(vm.breastImplant)">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="errorDescription">
+                            <span ng-show="vm.isValidDate">From date can not be greater that To date.</span>
+                            <span ng-show="vm.isValidProdcutWithRange">Product date range already exists.</span>
+                            <span ng-show="vm.isProdcutEmpty">Product cannot be empty.</span>
+                            <span ng-show="vm.isBreastImplantDateRangeSelected">Product from date cannot be empty.</span>
+                        </div><div class="col-xs-2"></div>
+                    </div>
+
+                </div>
+                <div class="row custom-font-sm">
+                    <div class="col-xs-12 margin-top-10" ng-repeat="breastImplant in vm.practice.brestImplants track by $index">
+                        <div class="row" ng-hide="breastImplant.RecordStatusId == 2">
+                            <div class="col-xs-6 custom-margin-top">{{breastImplant.brestImplant.name}}</div>
+                            <div class="col-xs-3 custom-margin-top">{{breastImplant.fromDate |date : "MM/dd/yyyy"}}</div>
+
+                            <!--<div class="col-xs-3">{{breastImplant.toDate | date : "MM/dd/yyyy"}} </div>-->
+                            <div class="col-xs-1">
+                                <button title="Remove" class="icon-no-border" aria-label="Settings" type="button" ng-click="removeBreastImplant($index)">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="btn-bar custom-sticky" afkl-sticky-element="bottom" style="padding-right: 2em;">
+            <button class="" type="button" aria-label="Settings" ng-click="cancel($event)">
+                Cancel
+            </button>
+            <button class="primary" type="submit" ng-disabled="isCubeProcessing || ((practiceForm.practiceName.$error.required && practiceForm.addressLine1.$error.required && practiceForm.city.$error.required  && practiceForm.state.$error.required  && practiceForm.zip.$error.required  && practiceForm.contactPerson.$error.required && practiceForm.contactNumber.$error.required)|| isSaveClicked)"
+                    aria-label="Settings" ng-click="save(practiceForm)">
+                Save
+            </button>
+        </div>
+    </form>
+
+    <!--Create / Edit User Modal-->
+    <modal title="{{modalTitle}}" visible="showUserModal" class="hide userManagementPopup" custom="true">
+
+        <div class="alert alert-success" ng-show="showSuccess" role="alert">Successfully saved.</div>
+        <div class="alert alert-danger" ng-show="showError" role="alert">Required information missing or invalid. Please check and try again!</div>
+
+        <div class="createNewUser">
+            <div class="row">
+                <div class="col-md-5">First Name*</div>
+                <div class="col-md-7">
+
+                    <div id="lbl_role_name_error" ng-class="{ 'hasError' : (submitted && User.FirstNameIsEmpty)  }">
+                        <input id="txt_firstname" type="text" class="full-width" ng-model="User.FirstName" placeholder="First Name" maxlength="20">
+                        <span class="errorDescription" ng-show="(submitted && User.FirstNameIsEmpty)"><i class="icon-error"></i><span class="errorText">First Name cannot be empty</span></span>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-5">Last Name*</div>
+                <div class="col-md-7">
+                    <div id="lbl_role_name_error" ng-class="{ 'hasError' : (submitted && User.LastNameIsEmpty)  }">
+                        <input id="txt_lastname" type="text" class="full-width" ng-model="User.LastName" placeholder="Last Name" maxlength="20">
+                        <span class="errorDescription" ng-show="(submitted && User.LastNameIsEmpty)"><i class="icon-error"></i><span class="errorText">Last Name cannot be empty</span></span>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-5">Email*</div>
+                <div class="col-md-7">
+                    <div id="lbl_role_name_error" ng-class="{ 'hasError' : (submitted && User.EmailIsEmpty) || (submitted && User.EmailIsInvalid) || (submitted && User.EmailExists)}">
+                        <input id="txt_email" type="text" class="full-width" ng-model="User.Email" placeholder="Email">
+                        <span id="lbl_firstname_error" class="errorDescription" ng-show="submitted && User.EmailIsEmpty"><i class="icon-error"></i><span class="errorText">Email cannot be empty</span></span>
+                        <span class="errorDescription" ng-show="submitted && User.EmailIsInvalid"><i class="icon-error"></i><span class="errorText">Please enter a valid Email</span></span>
+                        <span class="errorDescription" ng-show="submitted && User.EmailExists"><i class="icon-error"></i><span class="errorText">{{emailErrorText}}</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row text-right">
+            <button id="btn_reset" confirm-button="Reset()" title="Reset" message="Are you sure you want to Reset?" yes="Yes" no="No" placement="right" ng-show="isEditMode" type="button" class="btn btn-primary pull-left margin-left-10">Reset Password</button>
+            <button id="btn_cancel" type="button" class="btn btn-primary inline-btn btn-dark pull-right margin-left-5" ng-click="toggleModal('false')">Cancel</button>
+            <button id="btn_save" ng-disabled="disableSave" type="button" class="btn btn-primary inline-btn pull-right margin-left-5" ng-click="createUser()">Save</button>
+        </div>
+    </modal>
+
+    <modal title="Are You Sure?" visible="showModal" class="hide">
+        <div class="row" id="modal-body">
+            <p>There may be unsaved changes. Are you sure you want to leave this page?</p>
+        </div>
+        <div class="row text-right">
+            <button class="btn btn-primary" type="button" ng-click="confirmYes()">Yes</button>
+            <button class="btn btn-warning" type="button" ng-click="confirmNo()">No</button>
+        </div>
+    </modal>
+    <modal title="Cube Refresh" visible="showOkModal" class="hide" ng-cloak>
+        <div class="row" id="modal-body">
+            <p>Cube refresh in progress. Save function is disabled</p>
+        </div>
+        <div class="row text-right">
+            <button class="btn btn-warning" type="button" ng-click="confirmNo()">OK</button>
+        </div>
+    </modal>
+</div>

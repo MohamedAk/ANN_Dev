@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<parameters>
+  <parameter name="InternalLoginUrl" defaultValue="http://localhost:9000/Portal">
+    <parameterEntry kind="XmlFile" scope="web\.config$" match="/configuration/appSettings/add[@key='InternalLoginUrl']" />
+  </parameter>
+  <parameter name="RR:Url-GetUserDetailsFromUserToken" defaultValue="http://localhost:9001/RRSimulator/api/Mock/GetUserDetails">
+    <parameterEntry kind="XmlFile" scope="web\.config$" match="/configuration/appSettings/add[@key='RR:Url-GetUserDetailsFromUserToken']" />
+  </parameter>
+  <parameter name="domainname" defaultValue="localhost">
+    <parameterEntry kind="XmlFile" scope="web\.config$" match="/configuration/appSettings/add[@key='domainname']" />
+  </parameter>
+  <parameter name="CoreServiceDomain" defaultValue="http://localhost:9000/Portal">
+    <parameterEntry kind="XmlFile" scope="web\.config$" match="/configuration/appSettings/add[@key='CoreServiceDomain']" />
+  </parameter>
+  <parameter name="identityService" defaultValue="http://localhost:9000/Portal/">
+    <parameterEntry kind="XmlFile" scope="web\.config$" match="/configuration/appSettings/add[@key='identityService']" />
+  </parameter>
+</parameters>

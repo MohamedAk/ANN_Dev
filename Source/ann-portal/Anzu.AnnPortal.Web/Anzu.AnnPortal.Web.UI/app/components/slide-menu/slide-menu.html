@@ -1,0 +1,93 @@
+<div class="main-slide-menu" ng-controller="Components.SlideMenuCtrl as vm">
+    <md-sidenav class="md-sidenav-left" md-component-id="main-slide-menu" md-whiteframe="4" style="top:45px;" layout="column">
+        <div layout class="user-container">
+            <img id="profileImage" data-ng-src="data:image/png;base64,{{vm.user.DocumentContent}}" onerror="this.src='app/assets/images/profile_pic.jpg';" style="width:65px; height:65px;" ng-click="profileImagewindow.open()" />
+            <div flex class="user-name" layout="column" layout-align="center start">
+                <h4>{{firstName}}</h4>
+                <h3>{{lastName}}</h3>
+            </div>
+
+            <div id="profileImagewindow" kendo-window="profileImagewindow" k-title="'Upload profile image'"
+                 k-width="600" k-height="200" k-visible="false"
+                 k-content="{ url: '../Portal/app/components/slide-menu/upload-profile-image.html' }"
+                 k-on-open="win2visible = true" k-on-close="win2visible = false" k-options="windowOptions"></div>
+
+        </div>
+        <md-content flex class="menu" style="background: #fafafa">
+            <md-subheader class="md-no-sticky" ng-show="!vm.isAdmin()">Dashboards</md-subheader>
+            <md-list-item href="#/dashboard/{{dashboard.id}}" ng-show="!vm.isAdmin()" ng-class="{active:isActiveRoute('/dashboard/'+dashboard.id)}" ng-repeat="dashboard in vm.dashboards" ng-click="closeMenu()">
+                <p><i class="fa {{dashboard.icon}}" aria-hidden="true"></i> {{dashboard.name}} <span ng-show="isActiveRoute('/dashboard/'+dashboard.id)" class="pull-right"><i class="fa fa-caret-right" aria-hidden="true"></i></span></p>
+            </md-list-item>
+            <md-divider></md-divider>
+            <md-subheader class="md-no-sticky" ng-show="vm.isAdmin()">Admin</md-subheader>
+            <md-list-item class="" href="#/admin/practice-management" ng-show="vm.isAdmin()" ng-click="closeMenu()">
+                <p>
+                    <i class="fa fa-cogs" aria-hidden="true"></i> Practice Management
+                    <span ng-show="isActiveRoute('/admin/practice-management')" class="pull-right"><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+                </p>
+            </md-list-item>
+
+            <md-list-item class="" href="#/admin/procedure-filter-mappings" ng-show="vm.isAdmin()" ng-click="closeMenu()">
+                <p>
+                    <i class="fa fa-cogs" aria-hidden="true"></i> Procedure Filter Mapping
+                    <span ng-show="isActiveRoute('/admin/procedure-filter-mappings')" class="pull-right"><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+                </p>
+            </md-list-item>
+
+            <md-list-item class="" href="#/admin/procedure-filter-meta-data" ng-show="vm.isAdmin()" ng-click="closeMenu()">
+                <p>
+                    <i class="fa fa-cogs" aria-hidden="true"></i> Procedure Filter Meta Data
+                    <span ng-show="isActiveRoute('/admin/procedure-filter-meta-data')" class="pull-right"><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+                </p>
+            </md-list-item>
+
+            <!--<md-list-item class="" href="#/admin/asap-user-management" ng-show="vm.isAdmin()" ng-click="closeMenu()">
+                <p>
+                    <i class="fa fa-cogs" aria-hidden="true"></i> ASAP Users
+                    <span ng-show="isActiveRoute('/admin/asap-user-management')" class="pull-right"><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+                </p>
+            </md-list-item>-->
+
+            <md-list-item class="" href="#/admin/user-management" ng-show="vm.isAdmin()" ng-click="closeMenu()">
+                <p>
+                    <i class="fa fa-cogs" aria-hidden="true"></i> User Management
+                    <span ng-show="isActiveRoute('/admin/user-management')" class="pull-right"><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+                </p>
+            </md-list-item>
+
+            <md-divider></md-divider>
+
+            <md-subheader class="md-no-sticky">Links</md-subheader>
+
+            <!--<md-list-item target="_blank" href="//www.radarresource.com">
+                <p><img style="width: 1.4rem;position: relative;top: -0.1rem;margin-right: .8rem;" src="./app/assets/images/radarresource-logo.png" /> RadarResource.com</p>
+            </md-list-item>-->
+            <!--<md-list-item target="_blank" href="//www.neuron-dashboard.com">
+                <p><i class="fa fa-link" aria-hidden="true"></i> Neuron Dashboard</p>
+            </md-list-item>-->
+
+            <md-divider></md-divider>
+            <md-list-item class="" href="#/settings" ng-click="closeMenu()">
+                <p>
+                    <i class="fa fa-cogs" aria-hidden="true"></i> Settings
+                    <span ng-show="isActiveRoute('/settings')" class="pull-right"><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+                </p>
+            </md-list-item>
+            <!--<md-list-item class="" href="#/help" ng-click="closeMenu()">
+                <p>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i> Help
+                    <span ng-show="isActiveRoute('/help')" class="pull-right"><i class="fa fa-caret-right" aria-hidden="true"></i></span>
+                </p>
+            </md-list-item>-->
+
+            <md-list-item class="" href="{{logoffLink}}">
+                <p><i class="fa fa-power-off" aria-hidden="true"></i> Logout</p>
+            </md-list-item>
+            <p class="md-no-style" style="text-align: center; font-size: 12px;">
+                Version {{appVersion}}
+            </p>
+        </md-content>
+    </md-sidenav>
+</div>
+
+

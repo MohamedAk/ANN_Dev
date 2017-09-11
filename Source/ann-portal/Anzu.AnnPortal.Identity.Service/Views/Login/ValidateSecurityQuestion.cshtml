@@ -1,0 +1,101 @@
+﻿@model Anzu.AnnPortal.Identity.Common.Model.ValidateSecurityQuestionViewModel
+
+<script src="~/Scripts/jquery-2.1.4.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+@{
+    ViewBag.Title = "Validate Security Question";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ANN</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="app/assets/images/ANN_Logo.png">
+
+    @Styles.Render("~/Content/vendor")
+
+    @Styles.Render("~/Content/css")
+
+    <style>
+        input.custom-margin-bottom {
+            margin-bottom: 5px;
+        }
+
+        .text-danger-custom {
+            font-size: 0.9em;
+        }
+
+        .validate ul {
+            list-style-type: none;
+            margin-left: -40px;
+            color: #8f2040 !important;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="mainWrapper container">
+        <div class="row">
+            <div class="col-md-12 loginWrapper">
+                <div class="login">
+                    <div class="left_sec">
+                        <img src="~/Content/Assets/ANN_Logo.png" />
+                    </div>
+
+                    <div class="right_sec change-password-container">
+
+                        <div class="heading">Validate Security Question</div>
+
+                        @using (Html.BeginForm("ValidateSecurityQuestion", "Login", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.SecurityQuestion, new { @class = "control-label col-md-12" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(m => m.SecurityQuestion, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Answer, new { @class = "control-label col-md-12" })
+                                <div class="col-md-12">
+                                    @Html.TextBoxFor(m => m.Answer, new { @class = "form-control col-md-12", @maxlength = "30" })
+                                </div>
+                            </div>
+                            @Html.HiddenFor(m => m.UserId, new { @class = "form-control" })
+
+                            <div class="validate">
+                                @Html.ValidationSummary()
+                                @if (ViewBag.ShowLink)
+                                {
+                                    <a href="@ViewBag.AdminEmail"></a>
+                                    <a href="mailto:@ViewBag.AdminEmail" target="_top">Did you forgot the answer?</a>
+                                }
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                    <input type="submit" value="Reset password" class="btn btn-default" />
+                                </div>
+                                <div class="col-md-2 pull-right">
+                                    <input type="button" value="Cancel" class="btn btn-default" onclick="location.href='@Url.Action("Login", "Login")'" />
+                                </div>
+                            </div>
+                        }
+
+                        @section Scripts {
+                            @Scripts.Render("~/bundles/jqueryval")
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

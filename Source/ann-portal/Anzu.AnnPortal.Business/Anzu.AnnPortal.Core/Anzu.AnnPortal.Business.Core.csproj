@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A6078094-7DC9-4D1A-9722-CFE472C2608E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Anzu.AnnPortal.Business.Core</RootNamespace>
+    <AssemblyName>Anzu.AnnPortal.Business.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Qa|AnyCPU'">
+    <OutputPath>bin\Qa\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DevIdentity|AnyCPU'">
+    <OutputPath>bin\DevIdentity\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.6.0.2\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AutoMapperConf\AutoMapperConf.cs" />
+    <Compile Include="BaseService.cs" />
+    <Compile Include="Core\AccountService.cs" />
+    <Compile Include="Core\EmailService.cs" />
+    <Compile Include="Core\MetadataService.cs" />
+    <Compile Include="Core\NavigationBarService.cs" />
+    <Compile Include="Core\PracticeService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Anzu.AnnPortal.Common.IocContainer\Anzu.AnnPortal.Common.IocContainer.csproj">
+      <Project>{da34d16b-7598-4c3a-99ce-448bb58d3f77}</Project>
+      <Name>Anzu.AnnPortal.Common.IocContainer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Anzu.AnnPortal.Common.Model\Anzu.AnnPortal.Common.Model.csproj">
+      <Project>{4760ec51-95b0-42a2-805e-17872a4893ba}</Project>
+      <Name>Anzu.AnnPortal.Common.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Anzu.AnnPortal.Common.Notification\Anzu.AnnPortal.Common.Notification.csproj">
+      <Project>{6bc16db5-eb54-4a4e-9971-f836b50fa138}</Project>
+      <Name>Anzu.AnnPortal.Common.Notification</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Anzu.AnnPortal.Data\Anzu.AnnPortal.Data.EntityManager\Anzu.AnnPortal.Data.EntityManager.csproj">
+      <Project>{14C03223-564C-42BE-BE24-B5BDF8427EBA}</Project>
+      <Name>Anzu.AnnPortal.Data.EntityManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Anzu.AnnPortal.Data\Anzu.AnnPortal.Data.Model\Anzu.AnnPortal.Data.Model.csproj">
+      <Project>{d5eed67f-6c3d-4ae9-8a9d-7dd91a422dfd}</Project>
+      <Name>Anzu.AnnPortal.Data.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Anzu.AnnPortal.Data\Anzu.AnnPortal.Data.Repository\Anzu.AnnPortal.Data.Repository.csproj">
+      <Project>{4DDC69BE-B1E6-413C-811A-19F12571752C}</Project>
+      <Name>Anzu.AnnPortal.Data.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Anzu.AnnPortal.API\Anzu.AnnPortal.Business.Api.csproj">
+      <Project>{398ACFA2-8476-4014-A07A-2B31D12AC837}</Project>
+      <Name>Anzu.AnnPortal.Business.Api</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

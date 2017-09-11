@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4760EC51-95B0-42A2-805E-17872A4893BA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Anzu.AnnPortal.Common.Model</RootNamespace>
+    <AssemblyName>Anzu.AnnPortal.Common.Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Qa|AnyCPU'">
+    <OutputPath>bin\Qa\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DevIdentity|AnyCPU'">
+    <OutputPath>bin\DevIdentity\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Base\BaseDTO.cs" />
+    <Compile Include="Common\StateDTO.cs" />
+    <Compile Include="Common\UserRoles.cs" />
+    <Compile Include="JobStatusDTO.cs" />
+    <Compile Include="Portal\AuthenticateUserResultDTO.cs" />
+    <Compile Include="Portal\AuthenticationDTO.cs" />
+    <Compile Include="Common\ZipCodeDTO.cs" />
+    <Compile Include="Enum\RecordStatus.cs" />
+    <Compile Include="Portal\AuthenticateResponseDTO.cs" />
+    <Compile Include="Portal\BrestImplantDTO.cs" />
+    <Compile Include="Portal\CompanyDTO.cs" />
+    <Compile Include="Portal\DashboardDTO.cs" />
+    <Compile Include="Portal\EmailHandlerDTO.cs" />
+    <Compile Include="Portal\EmrListDTO.cs" />
+    <Compile Include="Portal\IdentityUserDTO.cs" />
+    <Compile Include="Portal\PracticeBrestImplantDTO.cs" />
+    <Compile Include="Portal\PracticeDTO.cs" />
+    <Compile Include="Portal\PracticeProcedureDTO.cs" />
+    <Compile Include="Portal\PracticeUserUpdateDTO.cs" />
+    <Compile Include="Portal\ProcedureDTO.cs" />
+    <Compile Include="Portal\ProcedureLevelDTO.cs" />
+    <Compile Include="Portal\ProcessCubeDTO.cs" />
+    <Compile Include="Portal\ProductDTO.cs" />
+    <Compile Include="Portal\ProductTypeDTO.cs" />
+    <Compile Include="Portal\ProfileImageHandlerDTO.cs" />
+    <Compile Include="Portal\RelatedProcedureDTO.cs" />
+    <Compile Include="Portal\RoleDashboardDTO.cs" />
+    <Compile Include="Portal\RoleDTO.cs" />
+    <Compile Include="Portal\ExternalUserDTO.cs" />
+    <Compile Include="Portal\SearchIdentityUserResultDTO.cs" />
+    <Compile Include="Portal\SearchUserResultDTO.cs" />
+    <Compile Include="Portal\ServiceDTO.cs" />
+    <Compile Include="Portal\NavBarDTO.cs" />
+    <Compile Include="Portal\SqlJobDTO.cs" />
+    <Compile Include="Portal\UserDTO.cs" />
+    <Compile Include="Portal\UserManageDTO.cs" />
+    <Compile Include="Portal\UserRoleDTO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Common\RegionDTO.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

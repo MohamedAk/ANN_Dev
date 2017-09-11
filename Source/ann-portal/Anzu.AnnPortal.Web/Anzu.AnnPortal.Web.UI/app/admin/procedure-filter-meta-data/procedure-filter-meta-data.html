@@ -1,0 +1,204 @@
+<div ng-include="'app/components/navbar/navbar.html'"></div>
+<style>
+    body {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .mCSB_scrollTools .mCSB_draggerContainer {
+        right: -60px;
+    }
+
+    .mCSB_1_dragger_vertical {
+        background: #f00;
+    }
+
+    .mCSB_dragger_bar {
+        border-radius: 0px !important;
+        width: 8px !important;
+    }
+
+    .settings-page .group {
+        margin-bottom: 0rem;
+    }
+
+    .no-data-alert {
+        text-align: center;
+    }
+</style>
+<div class="module-settings has-navbar">
+    <div class="breadcrumb">
+        <div class="breadcrumb-container row">
+            <div class="col-xs-6" ng-show="vm.subTitle">
+                <span><a href="#/admin/practice-management">Practice Management</a> | </span>
+            </div>
+            <div class="col-xs-6 text-right pull-right jump-to">
+                <!--Jump To : <a href="#/admin/practice-management">Practice Management</a>-->
+            </div>
+        </div>
+    </div>
+    <div class="settings-page">
+        <form name="filterForm">
+            <h1>Procedure Filter Meta Data</h1>
+            <br />
+            <div class="text-right" ng-if="curTab === 1 || curTab === 2 || curTab === 3 || curTab === 4">
+                <a class="button primary" ng-click="addToLevel()">
+                    <i class="fa fa-plus"></i> Create
+                </a>
+            </div>
+            <div class="text-right" ng-if="curTab === 5">
+                <a class="button primary" ng-click="addToBreastImplants()">
+                    <i class="fa fa-plus"></i> Create
+                </a>
+            </div>
+            <div class="text-right" ng-if="curTab === 6">
+                <a class="button primary" ng-click="addToProdcutsSold()">
+                    <i class="fa fa-plus"></i> Create
+                </a>
+            </div>
+            <div class="text-right" ng-if="curTab === 7">
+                <a class="button primary" ng-click="addToProductCompanie()">
+                    <i class="fa fa-plus"></i> Create
+                </a>
+            </div>
+            <br />
+            <div class="group">
+                <div class="row no-gutter">
+                    <div class="col-xs-2">
+                        <ul class="list-group tab-group vertical">
+                            <li ng-click="changeTabLevel(1)" ng-class="{'active-tab':curTab === 1}">Level 1</li>
+                            <li ng-click="changeTabLevel(2)" ng-class="{'active-tab':curTab === 2}">Level 2</li>
+                            <li ng-click="changeTabLevel(3)" ng-class="{'active-tab':curTab === 3}">Level 3</li>
+                            <li ng-click="changeTabLevel(4)" ng-class="{'active-tab':curTab === 4}">Level 4</li>
+                            <li ng-click="curTab = 5; vm.isItemExist = vm.isItemEmpty = false; searchText=''" ng-class="{'active-tab':curTab === 5}">Breast Implants</li>
+                            <li ng-click="curTab = 6; vm.isItemExist = vm.isItemEmpty = false; searchText=''" ng-class="{'active-tab':curTab === 6}">Products Sold</li>
+                            <li ng-click="curTab = 7; vm.isItemExist = vm.isItemEmpty = false; searchText=''" ng-class="{'active-tab':curTab === 7}">Product Companies</li>
+                        </ul>
+                    </div>
+                    <div class="col-xs-10" style="padding-left:2rem;" ng-class="{ 'hasError' : vm.isItemExist || vm.isItemEmpty }">
+                        <span class="errorDescription" ng-show="vm.isItemExist">This item is already existing in the system</span>
+                        <span class="errorDescription" ng-show="vm.isItemEmpty">Data fields cannot be empty</span>
+                    </div>
+                    <div class="col-xs-10">
+                        <div class="col-xs-12 tab-content">
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <input type="text" ng-model="searchText" placeholder="Filter By" />
+                                </div>
+                                <!--<div class="col-xs-2">
+                                    <a class="button primary">
+                                        <i class="fa fa-search"></i> Search
+                                    </a>
+                                </div>-->
+                            </div>
+                            <hr />
+                        </div>
+                        <div ng-if="curTab === 1 || curTab === 2 || curTab === 3 || curTab === 4" class="col-xs-12 tab-content" practice-list="310">
+                            <ul class="list-group">
+                                <li ng-repeat="item in filteredData = (vm.levels['level'+curTab] | filter : searchText) track by $index">
+                                    <div class="row" ng-hide="item.RecordStatusId == 2">
+                                        <div class="col-xs-8" ng-class="{ 'hasError' : item.isError}">
+                                            <input type="text" ng-model="item.name" ng-change="levelChange()" ng-blur="isDupplicateLevel($index)" />
+                                        </div>
+                                        <!--<div class="col-xs-2 text-center" style="line-height: 34px;" ng-show="curTab == 3 || curTab == 4">
+                                            <label>
+                                                <input type="checkbox" name="" ng-model="item.isProduct" ng-change="levelChange()" /> Product
+                                            </label>
+                                        </div>-->
+                                        <div class="col-xs-2">
+                                            <button title="Remove" class="icon-no-border" aria-label="Settings" ng-show="item.recordStatusId != 2" ng-click="removeFromLevel(filteredData, $index)">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div ng-if="curTab === 5" class="col-xs-12 tab-content" practice-list="310">
+
+                            <ul class="list-group">
+                                <li ng-repeat="item in vm.breastImplants | filter : searchText track by $index">
+                                    <div class="row" ng-hide="item.recordStatusId == 2">
+                                        <div class="col-xs-8" ng-class="{ 'hasError' : item.isError}">
+                                            <input type="text" ng-model="item.name" ng-change="breastImplantChange()" ng-blur="isDupplicateBreastImplant($index)" />
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button ng-hide="item.Id" title="Remove" class="icon-no-border" aria-label="Settings" ng-click="removeBreastImplant(item.id)">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div ng-if="curTab === 6" class="col-xs-12 tab-content" practice-list="310">
+                            <ul class="list-group">
+                                <li ng-repeat="item in vm.productsSolds | filter : searchText track by $index">
+                                    <div class="row" ng-hide="item.recordStatusId == 2">
+                                        <div class="col-xs-8" ng-class="{ 'hasError' : item.isError}">
+                                            <input type="text" ng-model="item.name" ng-change="productChange()" ng-blur="isDupplicateProductsSold($index)" />
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button ng-hide="item.Id" title="Remove" class="icon-no-border" aria-label="Settings" ng-click="removeProdcutsSold(item.id)">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                        <div ng-if="curTab === 7" class="col-xs-12 tab-content" practice-list="310">
+                            <ul class="list-group">
+                                <li ng-repeat="item in vm.productCompanies | filter : searchText track by  $index">
+                                    <div class="row" ng-hide="item.recordStatusId == 2">
+                                        <div class="col-xs-8" ng-class="{ 'hasError' : item.isError}">
+                                            <input type="text" ng-model="item.name" ng-change="companyChange()" ng-blur="isDupplicateProductsCompanies($index)" />
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button ng-hide="item.Id" title="Remove" class="icon-no-border" aria-label="Settings" ng-click="removeProductCompanies(item.id)">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-bar" afkl-sticky-element="bottom">
+                    <button class="" aria-label="Settings" ng-click="cancel($event)">
+                        Cancel
+                    </button>
+                    <button ng-disabled="levelSubmitted || filterForm.$pristine" class="primary" aria-label="Settings" ng-show="curTab === 1 || curTab === 2|| curTab === 3 || curTab === 4" ng-click="saveLevel()">
+                        Save
+                    </button>
+
+                    <button class="primary" aria-label="Settings" ng-show="curTab === 5" ng-disabled="breastSubmitted" ng-click="saveBreastImplants()">
+                        Save
+                    </button>
+
+                    <button class="primary" aria-label="Settings" ng-show="curTab === 6" ng-disabled="productSubmitted" ng-click="saveProdcutsSolds()">
+                        Save
+                    </button>
+                    <button class="primary" aria-label="Settings" ng-show="curTab === 7" ng-disabled="companySubmitted" ng-click="saveProductCompanies()">
+                        Save
+                    </button>
+                </div>
+            </div>
+        </form>
+        <modal title="Are You Sure?" visible="showModal" class="hide">
+            <div class="row" id="modal-body">
+                <p>There may be unsaved changes. Are you sure you want to leave this page?</p>
+            </div>
+            <div class="row text-right">
+                <button class="btn btn-primary" type="button" ng-click="confirmYes()">Yes</button>
+                <button class="btn btn-warning" type="button" ng-click="confirmNo()">No</button>
+            </div>
+        </modal>
+    </div>
+</div>

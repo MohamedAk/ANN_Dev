@@ -1,0 +1,111 @@
+﻿@model Anzu.AnnPortal.Identity.Common.Model.LoginViewModel
+@using System.Web.Configuration;
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>ANN</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="app/assets/images/ANN_Logo.png">
+
+    @Styles.Render("~/Content/vendor")
+
+    @Styles.Render("~/Content/css")
+
+    <style>
+        input.custom-margin-bottom {
+            margin-bottom: 5px;
+        }
+
+        .text-danger-custom {
+            font-size: 0.9em;
+        }
+    </style>
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script>
+        var validateRecaptcha = function (e) {
+            //var recaptcha = $("#").val();
+            var reCap = document.getElementById('g-recaptcha-response');
+            if (reCap) {
+                // console.log(reCap.value);
+                return (reCap.value != "");
+            }
+            else {
+                return true;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="mainWrapper container">
+        <div class="row">
+            <div class="col-md-12 loginWrapper">
+
+                <div class="login">
+                    <div class="left_sec">
+                        <img src="~/Content/Assets/ANN_Logo.png" />
+                    </div>
+
+                    <div class="right_sec">
+                        <div class="heading">Login</div>
+                        <div class="inputs">
+                            <section id="loginForm">
+                                @using (Html.BeginForm("Login", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form", onsubmit = "return validateRecaptcha()" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="UserName">User Name</label>
+                                        <div class="col-md-12">
+                                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control custom-margin-bottom", placeholder= "Email" })
+                                            @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "validate text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label" for="Password">Password</label>
+                                        <div class="col-md-12">
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control custom-margin-bottom", placeholder = "Password" })
+                                            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "validate text-danger" })
+                                        </div>
+                                    </div>
+                                    if (ViewBag.AttemptsExceeded == true)
+                                    {
+                                        <div class="form-group">
+                                            <div class="col-md-4">
+                                                <div class="g-recaptcha" data-sitekey="6LeiuSMUAAAAAClXXlpDNh_52-vuF_htLRErRDAR"></div>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <div class="createNewUser">
+                                                <a href="@string.Format("{0}Login/ForgotPassword", WebConfigurationManager.AppSettings["IdentityService"].ToString())">Forgot Password</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-10">
+                                            <input type="submit" value="Log in" class="btn btn-default" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            @Html.ValidationSummary(true, "", new { @class = "text-danger text-danger-custom " })
+                                        </div>
+                                    </div>
+                                }
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

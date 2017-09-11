@@ -1,0 +1,50 @@
+<div ng-include="'app/components/navbar/navbar.html'"></div>
+<style>
+    body {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .mCSB_scrollTools .mCSB_draggerContainer {
+        right: -60px;
+    }
+
+    .mCSB_1_dragger_vertical {
+        background: #f00;
+    }
+
+    .mCSB_dragger_bar {
+        border-radius: 0px !important;
+        width: 8px !important;
+    }
+
+    .settings-page .group {
+        padding: 1rem 3rem 1rem;
+        margin-top: 15px;
+    }
+</style>
+<div class="module-settings has-navbar" ng-init="Init()">
+    <div class="breadcrumb">
+        <div class="breadcrumb-container row">
+            <!--<div class="col-xs-6" ng-show="vm.subTitle">
+                <span><a href="#/admin/user-management">User Management</a> <i class="fa fa-angle-right"></i></span>
+            </div>-->
+        </div>
+    </div>
+    <div class="text-right">
+
+    </div>
+    <div class="settings-page">
+        <h1>Settings</h1>
+        <br />
+        <div class="group">
+            <div class="row">
+                <div class="col-md-12">
+                    <a class="button ng-scope" href="{{identityUrl}}Login/ChangePassword?isSecurityQuestionAnswered=true&auth=1" style="box-sizing: border-box;" id="changePwLink">
+                        <i class="fa fa-key" aria-hidden="true"></i> <small>Change Password</small>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

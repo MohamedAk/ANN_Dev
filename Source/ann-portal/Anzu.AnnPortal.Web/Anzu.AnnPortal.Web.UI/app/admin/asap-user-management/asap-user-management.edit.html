@@ -1,0 +1,97 @@
+﻿<style>
+    body {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .mCSB_scrollTools .mCSB_draggerContainer {
+        right: -60px;
+    }
+
+    .mCSB_1_dragger_vertical {
+        background: #f00;
+    }
+
+    .mCSB_dragger_bar {
+        border-radius: 0px !important;
+        width: 8px !important;
+    }
+</style>
+<div practice-list="228">
+    
+    <form name="practiceForm" ng-init="init()" novalidate >
+
+        <div class="row">
+            <div class="col-xs-6">
+                <h4>Asap Users</h4>
+                <br>
+                <div class="row">
+                    <div class="col-xs-10">
+
+                        <input kendo-drop-down-list id="asapUsers"
+                               k-option-label="'Select Asap Users'"
+                               k-data-text-field="'displayName'" ,
+                               k-data-value-field="'id'"
+                               k-data-source="userSearchDatasource"
+                               k-ng-model="vm.asapUser"
+                               k-filter="'contains'"
+                               k-min-length="3"
+                               name="zip"
+                               required />
+
+                    </div>
+
+                    <div class="col-xs-12">
+                        <div class="col-xs-2"></div><div class="col-xs-8">
+                            <p class="help-block" ng-show="vm.isUserAlreadyExsist">User already assigned to practice.</p>
+                        </div><div class="col-xs-2"></div>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="col-xs-2"></div><div class="col-xs-8">
+                            <p class="help-block" ng-show="vm.isExsistingASAPUser">User is already an ASAP user.</p>
+                        </div><div class="col-xs-2"></div>
+                    </div>
+                </div>
+                <!--<div practice-list="500">
+                    <div class="row">
+                        <div class="col-xs-12 margin-top-10">
+                            <div class="col-xs-12" ng-repeat="practiceUser in vm.practice.PracticeUserList track by $index">
+                                <div class="row" ng-hide="practiceUser.RecordStatusId == 2">
+                                    <div class="col-xs-8">{{practiceUser.firstName}}, {{practiceUser.lastName}}</div>
+                                    <div class="col-xs-2">
+                                        <button title="Add" class="icon-no-border" aria-label="Settings" ng-click="removePracticeUser($index)">
+                                            <i class="fa fa-minus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>-->
+            </div>
+
+        </div>
+
+        <div class="btn-bar" afkl-sticky-element="bottom" style="width: 1200px !important" >
+
+            <button class="" type="submit" aria-label="Settings" ng-click="cancel($event)">
+                Cancel
+            </button>
+            <button class="primary" type="submit" ng-click="save(practiceForm)">
+                Save
+            </button>
+        </div>
+    </form>
+    <modal title="Are You Sure?" visible="showModal" class="hide">
+        <div class="row" id="modal-body">
+            <p>There may be unsaved changes. Are you sure you want to leave this page?</p>
+        </div>
+        <div class="row text-right">
+            <button class="btn btn-primary" type="button" ng-click="confirmYes()">Yes</button>
+            <button class="btn btn-warning" type="button" ng-click="confirmNo()">No</button>
+        </div>
+    </modal>
+</div>

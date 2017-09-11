@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    @Styles.Render("~/Content/vendor")
+    @Styles.Render("~/Content/css")
+
+</head>
+<body>
+    <div class="mainWrapper container">
+        <div class="row">
+            @RenderBody()
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/vendor")
+
+    @RenderSection("scripts", required: false)
+
+    @*<div class="bi3_pb">
+            <a href="http://healthcare.brandixi3.com/?utm_source=AveraELTC%20&utm_medium=ClientPortal&utm_campaign=AveraPortal" target="_blank"><img src="~/Images/bi3_logo.png" /></a>
+        </div>*@
+</body>
+</html>

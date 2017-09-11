@@ -1,0 +1,37 @@
+<div ng-include="'app/components/navbar/navbar.html'"></div>
+<style>
+    .custom-alert-banner {
+        top: 45px;
+        position: fixed;
+        background-color: #FFC107 !important;
+    }
+
+    #helpIcon {
+        position: fixed;
+        top: 48px;
+        right: 12px;
+        z-index: 999;
+        opacity: 0.8;
+    }
+
+    .setDarkBackground {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
+</style>
+<script type="text/javascript" src="/Portal/Scripts/jquery.simulate.js"></script>
+<script type="text/javascript" src="/Portal/Scripts/jquery.simulate.ext.js"></script>
+<script type="text/javascript" src="/Portal/Scripts/jquery.simulate.drag-n-drop.js"></script>
+<div class="module-dashboard" ng-class="{setDarkBackground:!etlRunning}" layout="column" layout-align="stretch" flex>
+    <md-progress-circular ng-hide="iframeLoaded" class="iframe-progress" md-mode="indeterminate" ng-if="!etlRunning" ng-cloak></md-progress-circular>
+    <md-toolbar class="custom-alert-banner" ng-if="etlRunning" ng-cloak>
+        <div class="md-toolbar-tools">
+            <h2 flex md-truncate class="text-center">ETL is running</h2>
+        </div>
+    </md-toolbar>
+    <div class="loader more" ng-if="etlRunning" ng-cloak>
+    </div>
+    <iframe id="iframe1" flex class="dashboard-viewer-frame" src="{{vm.iframeUrl}}" ng-if="!etlRunning"></iframe>
+    <md-sidenav class="md-sidenav-right" md-disable-backdrop md-component-id="dashboard-filters-slide-menu" md-whiteframe="4" style="top:45px; font-size:.8em;" layout="column">
+    </md-sidenav>
+    <a href="/Portal/Help/index.html" target="_blank"><img src="/Portal/app/assets/images/ic_help_black_24dp_1x.png" alt="Help" id="helpIcon" /></a>
+</div>

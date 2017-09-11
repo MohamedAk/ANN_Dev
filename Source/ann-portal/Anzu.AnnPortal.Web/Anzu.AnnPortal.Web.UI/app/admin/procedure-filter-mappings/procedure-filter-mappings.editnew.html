@@ -1,0 +1,150 @@
+﻿<style>
+    body {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .mCSB_scrollTools .mCSB_draggerContainer {
+        right: -60px;
+    }
+
+    .mCSB_1_dragger_vertical {
+        background: #f00;
+    }
+
+    .mCSB_dragger_bar {
+        border-radius: 0px !important;
+        width: 8px !important;
+    }
+
+    .k-list-container {
+        white-space: nowrap !important;
+        width: auto !important;
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
+        min-width: 243px !important;
+    }
+
+    .k-list {
+        overflow-x: hidden !important;
+        overflow-y: hidden !important;
+        width: auto !important;
+    }
+</style>
+
+<div>{{editcontollermsg}}</div>
+<div>{{vm.procedureLevel1}}</div>
+<div>{{vm.procedure}}</div>
+<div>{{vm.practiceProductFlag}}</div>
+<div>{{vm.procedureLevel1}}</div>
+<div>{{vm.procedureLevel2}}</div>
+<div>{{vm.procedureLevel3}}</div>
+<div>{{vm.procedureLevel4}}</div>
+
+<div class="practice-list">
+
+    <form name="filterMappingForm" ng-init="init()" novalidate>
+
+        <div class="row">
+
+            <div class="col-xs-12 list-group">
+                <div class="col-xs-12" style="padding-bottom: 20px;">
+                    <div class="col-xs-3"><h4>Procedure Name</h4></div>
+                    <div class="col-xs-2"><h4>Level 1</h4></div>
+                    <div class="col-xs-2"><h4>Level 2</h4></div>
+                    <div class="col-xs-2"><h4>Level 3</h4></div>
+                    <div class="col-xs-2"><h4>Level 4</h4></div>
+                </div>
+                <div class="row" ng-class="{ 'hasError' : vm.isDupplicateSequence || vm.isNotCompletedSequence}">
+                    <div class="col-xs-12" style="padding-bottom: 5px; padding-left: 30px;">
+                        <span class="errorDescription" ng-show="vm.isDupplicateSequence">Procedure level sequence already exists in the system. Please specifiy a different sequence.</span>
+                        <span class="errorDescription" ng-show="vm.isNotCompletedSequence">Procedure level sequence is incomplete. Please complete before saving.</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-3">
+                        <input type="text" ng-model="vm.procedure">
+                    </div>
+                    <div class="col-xs-8 row">
+                        <div class="col-xs-3" bs-tooltip data-original-title="{{vm.procedureLevel1}}">
+                            <input kendo-drop-down-list id="procedure-level1"
+                                   k-option-label="'Select level 1..'"
+                                   k-ng-model="vm.procedureLevel1"
+                                   k-data-text-field="'name'"
+                                   k-data-value-field="'id'"
+                                   k-filter="'contains'"
+                                   k-data-source="level1Datasource"
+                                   k-min-length="2"
+                                   name="level1" />
+                        </div>
+                        <div class="col-xs-3" bs-tooltip data-original-title="{{vm.procedureLevel2}}">
+                            <input kendo-drop-down-list id="procedure-level2"
+                                   k-option-label="'Select level 2..'"
+                                   k-ng-model="vm.procedureLevel2"
+                                   k-data-text-field="'name'"
+                                   k-data-value-field="'id'"
+                                   k-filter="'contains'"
+                                   k-data-source="level2Datasource"
+                                   k-min-length="2"
+                                   name="level2"
+                                   k-ng-disabled="!vm.procedureLevel1 || $index != 0"
+                                   ng-model="vm.procedureLevel2" />
+                        </div>
+                        <div class="col-xs-3" bs-tooltip data-original-title="{{vm.procedureLevel3}}">
+                            <input kendo-drop-down-list id="procedure-level3"
+                                   k-option-label="'Select level 3..'"
+                                   k-ng-model="vm.procedureLevel3"
+                                   k-data-text-field="'name'"
+                                   k-data-value-field="'id'"
+                                   k-filter="'contains'"
+                                   k-data-source="level3Datasource"
+                                   k-min-length="2"
+                                   name="level3"
+                                   k-ng-disabled="!vm.procedureLevel3 || $index != 0"
+                                   ng-model="item.procedureLevelThree" />
+                        </div>
+                        <div class="col-xs-3" bs-tooltip data-original-title="{{item.procedureLevel4.name}}">
+                            <input kendo-drop-down-list id="procedure-level4"
+                                   k-option-label="'Select level 4..'"
+                                   k-ng-model="item.procedureLevel4"
+                                   k-data-text-field="'name'"
+                                   k-data-value-field="'id'"
+                                   k-filter="'contains'"
+                                   k-data-source="level4Datasource"
+                                   k-min-length="2"
+                                   name="level4"
+                                   k-ng-disabled="!item.procedureLevelThree || $index != 0"
+                                   ng-model="item.procedureLevelFour" />
+                        </div>
+                    </div>
+                    <div class="col-xs-1">
+                        <button title="Remove" class="icon-no-border" aria-label="Settings" ng-click="removeNewProcedureLevel($index)">
+                            <i class="fa fa-minus"></i>
+                        </button>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="btn-bar" afkl-sticky-element="bottom">
+            <button class="" aria-label="Settings" href="#/admin/procedure-filter-mappings/" ng-click="cancel()">
+                Cancel
+            </button>
+            <button class="primary" aria-label="Settings" ng-disabled="isCubeProcessing || (vm.newProcedureLevels.length == 0" ng-click="saveProcedureLevelSequences(vm.newProcedureLevels))">
+                Save
+            </button>
+        </div>
+    </form>
+    <modal title="Are You Sure?" visible="showModal" class="hide">
+        <div class="row" id="modal-body">
+            <p>There may be unsaved changes. Are you sure you want to leave this page?</p>
+        </div>
+        <div class="row text-right">
+            <button class="btn btn-primary" type="button" ng-click="confirmYes()">Yes</button>
+            <button class="btn btn-warning" type="button" ng-click="confirmNo()">No</button>
+        </div>
+    </modal>
+</div>

@@ -1,0 +1,809 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{E1851990-E8D4-4B59-8DB4-0C4940B741E1}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Anzu.AnnPortal.Web.UI</RootNamespace>
+    <AssemblyName>Anzu.AnnPortal.Web.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>..\..\DLL\bccrypto-csharp-1.8.1-bin\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="JWT, Version=1.3.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\JWT.1.3.4\lib\3.5\JWT.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Logging.1.1.0\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.IdentityModel.Tokens.5.1.0\lib\net451\Microsoft.IdentityModel.Tokens.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Host.SystemWeb.3.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Security.3.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Security.Cookies.3.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.Owin.Security.OAuth.3.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Swashbuckle.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cd1bb07a5ac7c7bc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Swashbuckle.Core.5.5.3\lib\net40\Swashbuckle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=5.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.IdentityModel.Tokens.Jwt.5.1.0\lib\net451\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http.Owin, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebApi.OutputCache.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Strathweb.CacheOutput.WebApi2.0.10.0\lib\net45\WebApi.OutputCache.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebApi.OutputCache.V2, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Strathweb.CacheOutput.WebApi2.0.10.0\lib\net45\WebApi.OutputCache.V2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiControllers\Core\MetadataController.cs" />
+    <Compile Include="ApiControllers\Core\NavigationBarController.cs" />
+    <Compile Include="ApiControllers\Core\PracticeController.cs" />
+    <Compile Include="ApiControllers\BaseController.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\SwaggerConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Attributes\HandleExceptionAttribute.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Encryption\EncryptionManager.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Handlers\ProfileImageUploadHandler.ashx.cs">
+      <DependentUpon>ProfileImageUploadHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\IdentityHelper.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MeViewModels.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="Util\HmacSha256.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\admin\admin.js" />
+    <Content Include="app\admin\asap-user-management\asap-user-management.index.html" />
+    <Content Include="app\admin\asap-user-management\asap-user-management.edit.html" />
+    <Content Include="app\admin\asap-user-management\asap-user-management.html" />
+    <Content Include="app\admin\asap-user-management\asap-user-management.js" />
+    <Content Include="app\admin\practice-management\practice-management.edit.html" />
+    <Content Include="app\admin\practice-management\practice-management.emr-mapping.html" />
+    <Content Include="app\admin\practice-management\practice-management.html" />
+    <Content Include="app\admin\practice-management\practice-management.index.html" />
+    <Content Include="app\admin\practice-management\practice-management.js" />
+    <Content Include="app\admin\procedure-filter-mappings\procedure-filter-mappings-related.edit.html" />
+    <Content Include="app\admin\procedure-filter-mappings\procedure-filter-mappings.index.html" />
+    <Content Include="app\admin\procedure-filter-mappings\procedure-filter-mappings.edit.html" />
+    <Content Include="app\admin\procedure-filter-mappings\procedure-filter-mappings.html" />
+    <Content Include="app\admin\procedure-filter-mappings\procedure-filter-mappings.js" />
+    <Content Include="app\admin\procedure-filter-mappings\procedure-filter-mappings.min.js">
+      <DependentUpon>procedure-filter-mappings.js</DependentUpon>
+    </Content>
+    <Content Include="app\admin\procedure-filter-meta-data\procedure-filter-meta-data.html" />
+    <Content Include="app\admin\procedure-filter-meta-data\procedure-filter-meta-data.js" />
+    <Content Include="app\admin\user-management\user-management.html" />
+    <Content Include="app\admin\user-management\user-management.js" />
+    <Content Include="app\app.css">
+      <DependentUpon>app.less</DependentUpon>
+    </Content>
+    <Content Include="app\app.js" />
+    <Content Include="app\app.min.css">
+      <DependentUpon>app.css</DependentUpon>
+    </Content>
+    <Content Include="app\app.min.js">
+      <DependentUpon>app.js</DependentUpon>
+    </Content>
+    <Content Include="app\assets\dashboard-override.css">
+      <DependentUpon>dashboard-override.less</DependentUpon>
+    </Content>
+    <Content Include="app\assets\dashboard-override.js" />
+    <Content Include="app\assets\dashboard-override.min.css">
+      <DependentUpon>dashboard-override.css</DependentUpon>
+    </Content>
+    <Content Include="app\assets\images\ANN_Logo.png" />
+    <Content Include="app\assets\images\ANN_ML.png" />
+    <Content Include="app\assets\images\aspas-logo.png" />
+    <Content Include="app\assets\images\default-profile-pic.jpg" />
+    <Content Include="app\assets\images\errorLogo.png" />
+    <Content Include="app\assets\images\favicon.ico" />
+    <Content Include="app\assets\images\ic_help_black_24dp_1x.png" />
+    <Content Include="app\assets\images\loading.gif" />
+    <Content Include="app\assets\images\profile_pic.jpg" />
+    <Content Include="app\assets\images\radarresource-logo.png" />
+    <Content Include="app\common\error\error.html" />
+    <Content Include="app\common\error\error.js" />
+    <Content Include="app\components\navbar\navbar.css">
+      <DependentUpon>navbar.less</DependentUpon>
+    </Content>
+    <Content Include="app\components\navbar\navbar.html" />
+    <Content Include="app\components\navbar\navbar.js" />
+    <Content Include="app\components\navbar\navbar.min.css">
+      <DependentUpon>navbar.css</DependentUpon>
+    </Content>
+    <Content Include="app\components\slide-menu\slide-menu.css">
+      <DependentUpon>slide-menu.less</DependentUpon>
+    </Content>
+    <Content Include="app\components\slide-menu\slide-menu.html" />
+    <Content Include="app\components\slide-menu\slide-menu.js" />
+    <Content Include="app\components\slide-menu\slide-menu.min.css">
+      <DependentUpon>slide-menu.css</DependentUpon>
+    </Content>
+    <Content Include="app\components\slide-menu\upload-profile-image.html" />
+    <Content Include="app\dashboard1.PNG" />
+    <Content Include="app\dashboard\dashboard-viewer.html" />
+    <Content Include="app\dashboard\dashboard.html" />
+    <Content Include="app\dashboard\dashboard.js" />
+    <Content Include="app\services\breast-implant.service.js" />
+    <Content Include="app\services\navbar.service.js" />
+    <Content Include="app\services\practice.service.js" />
+    <Content Include="app\services\procedure-filter-level.service.js" />
+    <Content Include="app\settings\settings.html" />
+    <Content Include="app\settings\settings.js" />
+    <Content Include="bin\Swashbuckle.Core.dll" />
+    <Content Include="bin\WebActivatorEx.dll" />
+    <Content Include="Content\vendors\angular-mocks\angular-mocks.js" />
+    <Content Include="Content\vendors\bootstrap\dist\js\ui-bootstrap-tpls-1.3.1.min.js" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\ajax.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\ajax_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\auto_hide_scrollbar_demo.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\auto_scrolling_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\bootstrap_examples-extended.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\bootstrap_examples.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\callbacks_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\colorbox\colorbox.css" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\colorbox\images\border.png" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\colorbox\images\controls.png" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\colorbox\images\loading.gif" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\colorbox\images\loading_background.png" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\colorbox\images\overlay.png" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\colorbox\jquery.colorbox-min.js" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\colorbox_demo.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\complete_examples.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\disable_destroy_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\fluid_scrollbar_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\full_page_demo.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\grid_and_snap_while_scrolling_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\iframe_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\images\img1.jpg" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\images\img2.jpg" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\images\img3.jpg" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\images\img4.jpg" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\images\img5.jpg" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\images\img6.jpg" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\images\img7.jpg" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\infinite_scroll_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\init_hidden_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\init_position_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\jquery_ui_accordion_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\jquery_ui_autocomplete_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\jquery_ui_dialog_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\jquery_ui_resizable_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\jquery_ui_sortable_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\jquery_ui_tabs_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\keyboard_nav_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\loading_each_script_separately.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\loading_each_script_separately_via_cdn.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\loading_scripts_via_cdn.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\logo-alt.png" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\logo.png" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\max-height_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\max-width_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\multiple_scrollbars_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\nested_scrollbars_demo.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\nested_scrollbars_demo_alt.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\nested_scrollbars_demo_alt_2.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\rtl_direction_demo.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\scrollbar_themes_demo.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\scrollTo_demo.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\scroll_buttons_and_snap_scrolling_examples.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\simple_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\simple_example_all_params.html" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\style.css" />
+    <Content Include="Content\vendors\custom-scrollbar\examples\textarea_example.html" />
+    <Content Include="Content\vendors\custom-scrollbar\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="Content\vendors\custom-scrollbar\jquery.mCustomScrollbar.css" />
+    <Content Include="Content\vendors\custom-scrollbar\jquery.mCustomScrollbar.js" />
+    <Content Include="Content\vendors\custom-scrollbar\jquery.mCustomScrollbar.min.css" />
+    <Content Include="Content\vendors\custom-scrollbar\js\minified\jquery-1.11.0.min.js" />
+    <Content Include="Content\vendors\custom-scrollbar\js\minified\jquery-1.9.1.min.js" />
+    <Content Include="Content\vendors\custom-scrollbar\js\minified\jquery-2.1.0.min.js" />
+    <Content Include="Content\vendors\custom-scrollbar\js\minified\jquery-ui-1.10.4.min.js" />
+    <Content Include="Content\vendors\custom-scrollbar\js\minified\jquery.mCustomScrollbar.min.js" />
+    <Content Include="Content\vendors\custom-scrollbar\js\minified\jquery.mousewheel-3.0.6.min.js" />
+    <Content Include="Content\vendors\custom-scrollbar\js\minified\jquery.mousewheel.min.js" />
+    <Content Include="Content\vendors\custom-scrollbar\js\uncompressed\jquery.mCustomScrollbar.js" />
+    <Content Include="Content\vendors\custom-scrollbar\js\uncompressed\jquery.mousewheel-3.0.6.js" />
+    <Content Include="Content\vendors\custom-scrollbar\js\uncompressed\jquery.mousewheel.js" />
+    <Content Include="Content\vendors\custom-scrollbar\LICENSE.txt" />
+    <Content Include="Content\vendors\custom-scrollbar\mCSB_buttons.png" />
+    <Content Include="Content\vendors\font-awesome\css\font-awesome-animation.min.css" />
+    <Content Include="Content\vendors\kendo\js\angular.min.js" />
+    <Content Include="Content\vendors\kendo\js\jquery.min.js" />
+    <Content Include="Content\vendors\kendo\js\jszip.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.all.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.angular.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.angular2.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.autocomplete.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.binder.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.button.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.calendar.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.color.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.colorpicker.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.columnmenu.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.columnsorter.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.combobox.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.core.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.data.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.data.odata.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.data.signalr.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.data.xml.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dataviz.barcode.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dataviz.chart.funnel.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dataviz.chart.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dataviz.chart.polar.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dataviz.core.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dataviz.diagram.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dataviz.gauge.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dataviz.map.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dataviz.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dataviz.mobile.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dataviz.qrcode.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dataviz.sparkline.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dataviz.stock.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dataviz.themes.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dataviz.treemap.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.datepicker.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.datetimepicker.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dialog.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dom.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.draganddrop.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.drawing.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.dropdownlist.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.editable.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.editor.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.excel.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.filebrowser.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.filtercell.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.filtermenu.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.fx.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.gantt.list.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.gantt.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.gantt.timeline.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.grid.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.groupable.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.imagebrowser.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.list.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.listview.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.maskedtextbox.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mediaplayer.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.menu.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.actionsheet.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.application.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.button.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.buttongroup.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.collapsible.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.drawer.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.listview.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.loader.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.modalview.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.navbar.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.pane.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.popover.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.scroller.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.scrollview.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.shim.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.splitview.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.switch.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.tabstrip.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.mobile.view.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.multiselect.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.notification.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.numerictextbox.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.ooxml.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.pager.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.panelbar.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.pdf.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.pivot.configurator.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.pivot.fieldmenu.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.pivotgrid.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.popup.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.progressbar.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.reorderable.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.resizable.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.responsivepanel.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.router.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.scheduler.agendaview.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.scheduler.dayview.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.scheduler.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.scheduler.monthview.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.scheduler.recurrence.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.scheduler.timelineview.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.scheduler.view.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.selectable.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.slider.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.sortable.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.splitter.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.spreadsheet.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.tabstrip.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.timepicker.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.timezones.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.toolbar.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.tooltip.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.touch.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.treelist.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.treeview.draganddrop.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.treeview.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.upload.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.userevents.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.validator.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.view.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.virtuallist.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.web.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.webcomponents.min.js" />
+    <Content Include="Content\vendors\kendo\js\kendo.window.min.js" />
+    <Content Include="Content\vendors\kendo\js\pako_deflate.min.js" />
+    <Content Include="Content\vendors\kendo\styles\kendo.common-material.min.css" />
+    <Content Include="Content\vendors\kendo\styles\kendo.material.min.css" />
+    <Content Include="Content\vendors\kendo\styles\Material\editor.png" />
+    <Content Include="Content\vendors\kendo\styles\Material\imagebrowser.png" />
+    <Content Include="Content\vendors\kendo\styles\Material\indeterminate.gif" />
+    <Content Include="Content\vendors\kendo\styles\Material\loading-image.gif" />
+    <Content Include="Content\vendors\kendo\styles\Material\loading.gif" />
+    <Content Include="Content\vendors\kendo\styles\Material\loading_2x.gif" />
+    <Content Include="Content\vendors\kendo\styles\Material\markers.png" />
+    <Content Include="Content\vendors\kendo\styles\Material\markers_2x.png" />
+    <Content Include="Content\vendors\kendo\styles\Material\slider-h.gif" />
+    <Content Include="Content\vendors\kendo\styles\Material\slider-v.gif" />
+    <Content Include="Content\vendors\kendo\styles\Material\sprite.png" />
+    <Content Include="Content\vendors\kendo\styles\Material\sprite_2x.png" />
+    <Content Include="Content\vendors\kendo\styles\Material\sprite_kpi.png" />
+    <Content Include="Content\vendors\kendo\styles\Material\sprite_kpi_2x.png" />
+    <Content Include="Content\vendors\lodash\lodash.min.js" />
+    <Content Include="Content\vendors\ng-sticky-element\dist\ng-sticky-element.min.css" />
+    <Content Include="Content\vendors\ng-sticky-element\dist\ng-sticky-element.min.js" />
+    <Content Include="Content\vendors\toastr\toaster.css" />
+    <Content Include="Content\vendors\toastr\toaster.js" />
+    <Content Include="EmailTemplates\cube_refresh_all_start.html" />
+    <Content Include="EmailTemplates\cube_refresh_manual_start.html" />
+    <Content Include="Errors\401.html" />
+    <Content Include="Errors\404.html" />
+    <Content Include="Errors\500.html" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="fonts\OpenSans\OpenSans.css">
+      <DependentUpon>OpenSans.less</DependentUpon>
+    </Content>
+    <Content Include="fonts\OpenSans\OpenSans.min.css">
+      <DependentUpon>OpenSans.css</DependentUpon>
+    </Content>
+    <Content Include="Content\vendors\angular-animate\angular-animate.js" />
+    <Content Include="Content\vendors\angular-aria\angular-aria.js" />
+    <Content Include="Content\vendors\angular-cookies\angular-cookies.js" />
+    <Content Include="Content\vendors\angular-material\angular-material.css" />
+    <Content Include="Content\vendors\angular-material\angular-material.js" />
+    <Content Include="Content\vendors\angular-resource\angular-resource.js" />
+    <Content Include="Content\vendors\angular-sanitize\angular-sanitize.js" />
+    <Content Include="Content\vendors\angular-ui-router.statehelper\statehelper.js" />
+    <Content Include="Content\vendors\angular-ui-router\release\angular-ui-router.js" />
+    <Content Include="Content\vendors\angular\angular.js" />
+    <Content Include="Content\vendors\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="Content\vendors\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Content\vendors\font-awesome\css\font-awesome.css" />
+    <Content Include="Content\vendors\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Content\vendors\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\vendors\jquery\dist\jquery.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Help\index.html" />
+    <Content Include="Parameters.xml" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="app\app.less" />
+    <Content Include="app\components\navbar\navbar.less" />
+    <Content Include="app\components\slide-menu\slide-menu.less" />
+    <Content Include="fonts\OpenSans\OpenSans-Bold-webfont.eot" />
+    <Content Include="fonts\OpenSans\OpenSans-Bold-webfont.woff" />
+    <Content Include="fonts\OpenSans\OpenSans-BoldItalic-webfont.eot" />
+    <Content Include="fonts\OpenSans\OpenSans-BoldItalic-webfont.woff" />
+    <Content Include="fonts\OpenSans\OpenSans-ExtraBold-webfont.eot" />
+    <Content Include="fonts\OpenSans\OpenSans-ExtraBold-webfont.woff" />
+    <Content Include="fonts\OpenSans\OpenSans-ExtraBoldItalic-webfont.eot" />
+    <Content Include="fonts\OpenSans\OpenSans-ExtraBoldItalic-webfont.woff" />
+    <Content Include="fonts\OpenSans\OpenSans-Italic-webfont.eot" />
+    <Content Include="fonts\OpenSans\OpenSans-Italic-webfont.woff" />
+    <Content Include="fonts\OpenSans\OpenSans-Light-webfont.eot" />
+    <Content Include="fonts\OpenSans\OpenSans-Light-webfont.woff" />
+    <Content Include="fonts\OpenSans\OpenSans-LightItalic-webfont.eot" />
+    <Content Include="fonts\OpenSans\OpenSans-LightItalic-webfont.woff" />
+    <Content Include="fonts\OpenSans\OpenSans-Regular-webfont.eot" />
+    <Content Include="fonts\OpenSans\OpenSans-Regular-webfont.woff" />
+    <Content Include="fonts\OpenSans\OpenSans-Semibold-webfont.eot" />
+    <Content Include="fonts\OpenSans\OpenSans-Semibold-webfont.woff" />
+    <Content Include="fonts\OpenSans\OpenSans-SemiboldItalic-webfont.eot" />
+    <Content Include="fonts\OpenSans\OpenSans-SemiboldItalic-webfont.woff" />
+    <Content Include="fonts\OpenSans\OpenSans.less" />
+    <Content Include="fonts\Roboto\Roboto-Bold.cyrillic-ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Bold.cyrillic.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Bold.greek-ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Bold.greek.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Bold.latin-ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Bold.latin.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Bold.vietnamese.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Font-Download.bat" />
+    <Content Include="fonts\Roboto\Roboto-Light.cyrillic-ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Light.cyrillic.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Light.greek-ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Light.greek.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Light.latin-ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Light.latin.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Light.vietnamese.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Medium.cyrillic-ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Medium.cyrillic.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Medium.greek-ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Medium.greek.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Medium.latin-ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Medium.latin.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Medium.vietnamese.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Regular.cyrillic-ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Regular.cyrillic.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Regular.greek-ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Regular.greek.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Regular.latin-ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Regular.latin.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Regular.vietnamese.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Thin.cyrillic-ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Thin.cyrillic.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Thin.greek-ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Thin.greek.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Thin.latin-ext.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Thin.latin.woff2" />
+    <Content Include="fonts\Roboto\Roboto-Thin.vietnamese.woff2" />
+    <Content Include="fonts\Roboto\roboto.less" />
+    <Content Include="Content\vendors\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\vendors\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\vendors\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\vendors\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\vendors\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Content\vendors\font-awesome\css\font-awesome.css.map" />
+    <Content Include="app\assets\dashboard-override.less" />
+    <Content Include="Content\vendors\font-awesome\less\font-awesome.less" />
+    <Content Include="Content\vendors\custom-scrollbar\.gitignore" />
+    <Content Include="Content\vendors\custom-scrollbar\bower.json" />
+    <Content Include="Content\vendors\custom-scrollbar\js\minified\jquery.mCustomScrollbar.min.js.gz" />
+    <Content Include="Content\vendors\custom-scrollbar\package.json" />
+    <Content Include="Content\vendors\custom-scrollbar\readme.md" />
+    <Content Include="Content\vendors\custom-scrollbar\source-files\mCSB_buttons.psd" />
+    <Content Include="app\app.min.js.map">
+      <DependentUpon>app.min.js</DependentUpon>
+    </Content>
+    <Content Include="app\admin\procedure-filter-mappings\procedure-filter-mappings.min.js.map">
+      <DependentUpon>procedure-filter-mappings.min.js</DependentUpon>
+    </Content>
+    <Content Include="app\admin\procedure-filter-mappings\procedure-filter-mappings.editnew.html" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="Handlers\ProfileImageUploadHandler.ashx" />
+    <None Include="Properties\PublishProfiles\DevIdentity.pubxml" />
+    <None Include="Properties\PublishProfiles\DevPackage.pubxml" />
+    <None Include="Properties\PublishProfiles\Local Test.pubxml" />
+    <None Include="Properties\PublishProfiles\Qa.pubxml" />
+    <None Include="Properties\PublishProfiles\Dev.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery.simulate.drag-n-drop.js" />
+    <Content Include="Scripts\jquery.simulate.ext.js" />
+    <Content Include="Scripts\jquery.simulate.js" />
+    <Content Include="Scripts\knockout.validation.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\_Home.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Home\User.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Dev.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.DevIdentity.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Qa.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Anzu.AnnPortal.Business\Anzu.AnnPortal.API\Anzu.AnnPortal.Business.Api.csproj">
+      <Project>{398ACFA2-8476-4014-A07A-2B31D12AC837}</Project>
+      <Name>Anzu.AnnPortal.Business.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Anzu.AnnPortal.Business\Anzu.AnnPortal.Core\Anzu.AnnPortal.Business.Core.csproj">
+      <Project>{A6078094-7DC9-4D1A-9722-CFE472C2608E}</Project>
+      <Name>Anzu.AnnPortal.Business.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Anzu.AnnPortal.Common.IocContainer\Anzu.AnnPortal.Common.IocContainer.csproj">
+      <Project>{da34d16b-7598-4c3a-99ce-448bb58d3f77}</Project>
+      <Name>Anzu.AnnPortal.Common.IocContainer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Anzu.AnnPortal.Common.Log\Anzu.AnnPortal.Common.Log.csproj">
+      <Project>{a58ee4f3-9f3f-4d3f-a199-8bed1b020b4f}</Project>
+      <Name>Anzu.AnnPortal.Common.Log</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Anzu.AnnPortal.Common.Model\Anzu.AnnPortal.Common.Model.csproj">
+      <Project>{4760ec51-95b0-42a2-805e-17872a4893ba}</Project>
+      <Name>Anzu.AnnPortal.Common.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Anzu.AnnPortal.Data\Anzu.AnnPortal.Data.EntityManager\Anzu.AnnPortal.Data.EntityManager.csproj">
+      <Project>{14c03223-564c-42be-be24-b5bdf8427eba}</Project>
+      <Name>Anzu.AnnPortal.Data.EntityManager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Anzu.AnnPortal.Data\Anzu.AnnPortal.Data.Model\Anzu.AnnPortal.Data.Model.csproj">
+      <Project>{D5EED67F-6C3D-4AE9-8A9D-7DD91A422DFD}</Project>
+      <Name>Anzu.AnnPortal.Data.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Dev|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Qa|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DevIdentity|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49172</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:9000/Portal</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:9000/Portal</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

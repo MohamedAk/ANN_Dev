@@ -1,0 +1,28 @@
+﻿<div ng-include="'app/components/navbar/navbar.html'"></div>
+
+
+<div class="module-settings has-navbar">
+    <div class="breadcrumb">
+        <div class="breadcrumb-container row">
+            <div class="col-xs-6" ng-show="vm.subTitle">
+                <span><a href="#/admin/asap-user-management">ASAP User Management</a> <i class="fa fa-angle-right"></i></span>
+            </div>
+            <div class="col-xs-6 text-right pull-right jump-to">
+                <!--Jump To : <a href="#/admin/asap-user-management">ASAP User Management</a>-->
+            </div>
+        </div>
+    </div>
+    <div class="settings-page">
+        <h1>{{vm.subTitle || 'ASAP User Management'}}</h1>
+        <br />
+        <div class="text-right" ng-if="vm.showCreateBtn">
+            <a class="button primary" href="#/admin/asap-user-management/new/edit" ng-click="save($event)">
+                <i class="fa fa-plus"></i> Create
+            </a>
+        </div>
+        <br />
+        <div class="group">
+            <ui-view />
+        </div>
+    </div>
+</div>

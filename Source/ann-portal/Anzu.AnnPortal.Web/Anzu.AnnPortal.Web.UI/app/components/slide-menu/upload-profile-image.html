@@ -1,0 +1,10 @@
+﻿<input name="Imagefile"
+       type="file"
+       accept=".jpg, .png, .jpeg, .gif, .bmp"
+       k-ng-model="ImageUrl"
+       k-multiple="false"
+       kendo-upload
+       k-async="{ saveUrl: '../Portal/Handlers/ProfileImageUploadHandler.ashx', autoUpload: true }"
+       k-select="onSelect"
+       k-success="onSuccess"
+       />

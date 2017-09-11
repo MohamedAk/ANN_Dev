@@ -1,0 +1,84 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background: #8d8d8d;
+    background: -moz-linear-gradient(-45deg, #8d8d8d 0%, #a3a3a3 100%);
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#8d8d8d), color-stop(100%,#a3a3a3));
+    background: -webkit-linear-gradient(-45deg, #8d8d8d 0%,#a3a3a3 100%);
+    background: -o-linear-gradient(-45deg, #8d8d8d 0%,#a3a3a3 100%);
+    background: -ms-linear-gradient(-45deg, #8d8d8d 0%,#a3a3a3 100%);
+    background: linear-gradient(135deg, #8d8d8d 0%,#a3a3a3 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8d8d8d', endColorstr='#a3a3a3',GradientType=1 );
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+html {
+    background: #8d8d8d;
+}
+
+.form-control {
+    border: solid 1px #ccc;
+    border-radius: 0;
+
+    &:hover,&:focus {
+        box-shadow: 0.05em 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.1) inset;
+        -moz-box-shadow: 0.05em 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.1) inset;
+        -webkit-box-shadow: 0.05em 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.1) inset;
+        -ms-box-shadow: 0.05em 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.1) inset;
+        -o-box-shadow: 0.05em 0.05em 0.05em 0.1em rgba(0, 0, 0, 0.1) inset;
+    }
+}
+
+#loginForm {
+    background: #ecf0f1;
+    padding: 2rem 3rem;
+
+    h3 {
+        text-align: center;
+        margin-bottom:3rem;
+    }
+    .btn-default{
+        background:#f47821;
+        color:#fff;
+        border-radius:0;
+        border:none;
+        width:100%;
+        padding:1.2rem;
+        font-size:1.2em; 
+    }
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Set padding to display errors that occur during databinding */
+.padding-error {
+    padding-top: 20px;
+}
+
+@media only screen and (max-width: 767px) {
+    .nofloat {
+        float: none;
+        padding: 10px 15px;
+    }
+}

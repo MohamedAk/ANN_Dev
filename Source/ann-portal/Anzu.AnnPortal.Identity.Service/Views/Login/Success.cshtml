@@ -1,0 +1,58 @@
+﻿<script src="~/Scripts/jquery-2.1.4.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+@{
+    ViewBag.Title = "Success";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>ANN</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="app/assets/images/ANN_Logo.png">
+
+    @Styles.Render("~/Content/vendor")
+
+    @Styles.Render("~/Content/css")
+
+    <style>
+        input.custom-margin-bottom {
+            margin-bottom: 5px;
+        }
+
+        .text-danger-custom {
+            font-size: 0.9em;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="mainWrapper container">
+        <div class="row">
+            <div class="col-md-12 loginWrapper">
+
+                <div class="login">
+                    <div class="left_sec">
+                        <img src="~/Content/Assets/ANN_Logo.png" />
+                    </div>
+
+                    <div class="right_sec">
+                        <div class="heading">Success</div>
+                        <div class="inputs">
+                            <h2>@ViewBag.Message</h2>
+                            <div class="validate" style="font-weight:bold; text-transform:uppercase;">Check your email for the temporary link to Login to the system</div>
+                            <br />
+                            <a href="/Identity/Login/Login">Go back to the login page</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

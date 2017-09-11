@@ -1,0 +1,261 @@
+﻿@{
+    ViewBag.Title = "User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/app/app.css" rel="stylesheet" />
+<link href="~/app/components/slide-menu/slide-menu.css" rel="stylesheet" />
+@section scripts {
+    <!--annPortalApp-->
+    <script src="~/app/app.js"></script>
+    <script src="~/app/services/practice.service.js"></script>
+    <script src="~/app/components/navbar/navbar.js"></script>
+    <script src="~/app/services/navbar.service.js"></script>
+    <script src="~/app/components/slide-menu/slide-menu.js"></script>
+
+    <!--Admin App-->
+    <script src="~/app/admin/Util.js"></script>
+    <script src="~/app/admin/App.js"></script>
+    <script src="~/app/admin/AdminApp.js"></script>
+    <script src="~/app/admin/controllers/Users.js"></script>
+}
+@section jsCode {
+    angular.bootstrap(document.getElementById("userManagement"), ['AdminApp']);
+    angular.bootstrap(document.getElementById("navbarManager"), ['annPortalApp']);
+}
+
+@{
+    var identityService = ViewBag.identityDomain;
+}
+<style>
+    body {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    .mCSB_scrollTools .mCSB_draggerContainer {
+        right: -60px;
+    }
+
+    .mCSB_1_dragger_vertical {
+        background: #f00;
+    }
+
+    .mCSB_dragger_bar {
+        border-radius: 0px !important;
+        width: 8px !important;
+    }
+</style>
+<script>
+    IDENTITY_SERVICE_DOMAIN = "@identityService";
+</script>
+<div ng-include="'app/components/slide-menu/slide-menu.html'"></div>
+
+<div class="module-settings has-navbar" id="navbarManager">
+    <div class="breadcrumb">
+        <div class="breadcrumb-container row">
+            <div class="col-xs-6" ng-show="vm.subTitle">
+                <span><a href="#/admin/user-management">User Management</a> <i class="fa fa-angle-right"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="settings-page">
+        <h1>User Management</h1>
+        <br />
+        <div class="text-right" ng-if="vm.showCreateBtn">
+            <a class="button primary" href="#" ng-click="toggleModal('true')">
+                <i class="fa fa-plus"></i> Create
+            </a>
+        </div>
+        <br />
+        <div class="group">
+            <div ng-non-bindable>
+                <div class="admin">
+                    <div id="userManagement" class="formWrapper" ng-controller="UserController" ng-init="Init()" ng-cloak>
+                        <h3>Search for Users</h3>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">First Name</div>
+                                    <div class="col-md-8"><input id="txt_search_firstname" type="text" ng-model="search.FirstName" class="full-width" placeholder="First Name" data-ng-keypress="onSearchInputKeyPress($event)"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">Last Name</div>
+                                    <div class="col-md-8"><input id="txt_search_lastname" type="text" ng-model="search.LastName" class="full-width" placeholder="Last Name" data-ng-keypress="onSearchInputKeyPress($event)"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="row">
+                                    <div class="col-md-4">User ID</div>
+                                    <div class="col-md-8"><input id="txt_search_userid" type="text" ng-model="search.UserId" class="full-width" placeholder="User ID" data-ng-keypress="onSearchInputKeyPress($event)"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="btn_clear" class="btn btn-primary inline-btn margin-left-5" ng-click="clearSearch()">Clear</div>
+                                <div id="btn_create_new" class="btn btn-primary inline-btn margin-left-5" ng-click="toggleModal('true')">Create New</div>
+                                <div id="btn_search" class="btn btn-primary inline-btn margin-left-5" ng-click="searchUsers();active = 1">Search</div>
+                            </div>
+                        </div>
+
+                        <div class="row userManagementTabs">
+                            <div class="col-md-12 full-height">
+                                <div class="row full-height">
+                                    <div class="col-md-12  KendoGridOverrid" style="height: calc(100%);">
+                                        <div class="tableBordere" style="height: calc(100%);">
+                                            <div kendo-grid="userGrid" class="full-height full-width faxTable" options="mainUsersGridOptions"
+                                                 id="myGrid">
+                                                <table>
+                                                    <tr k-row-template data-uid="#: uid #" ng-click="claim(dataItem.UserId)">
+                                                        <td>{{dataItem.UserId}}</td>
+                                                        <td>{{dataItem.FullName}}</td>
+                                                        <td>{{dataItem.UserType}}</td>
+                                                        <td>{{dataItem.CreatedDateTime | date:'MM/dd/yyyy'}}</td>
+                                                        <td>{{dataItem.UserRolesDisplay}}</td>
+                                                        <td>{{dataItem.PrimaryHub}}</td>
+                                                        <td>{{dataItem.Hubs}}</td>
+                                                        <td>
+                                                            <div ng-if="isUserAdmin=='True' || (isUserHubAdmin=='True' && dataItem.OrganizationId==hubId && dataItem.SecondaryHubIds.length==0)">
+
+                                                                <a id="lnk_recent_edit_{{dataItem.UserId}}" ng-show="dataItem.IsActive" class="inlineTextIcon margin-right-10" ng-click="Edit(dataItem.UserId)"><i class=" icon-edit"></i><span>Edit</span></a><span ng-show="user.IsActive">|</span>
+                                                                <a id="lnk_recent_deactivate_{{dataItem.UserId}}" ng-show="dataItem.IsActive" confirm-button="Delete(dataItem.UserId)" title="Are you sure?" message="Are you sure you want to Deactivate?" yes="Yes" no="No" placement="left" class="inlineTextIcon"><i class="icon-deactivate"></i><span>Deactivate</span></a>
+                                                                <a id="lnk_recent_activate_{{dataItem.UserId}}" ng-show="!dataItem.IsActive" confirm-button="Activate(dataItem.UserId)" title="Are you sure?" message="Are you sure you want to Activate?" yes="Yes" no="No" placement="left" class="inlineTextIcon"><i class="icon-activate"></i><span>Activate</span></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <modal title="{{modalTitle}}" visible="showModal" class="hide userManagementPopup" custom="true">
+
+                            <div class="alert alert-success" ng-show="showSuccess" role="alert">Successfully saved.</div>
+                            <div class="alert alert-danger" ng-show="showError" role="alert">Required information missing or invalid. Please check and try again!</div>
+
+                            <div class="createNewUser">
+
+                                <div class="row">
+                                    <div class="col-md-5">First Name*</div>
+                                    <div class="col-md-7">
+
+                                        <div id="lbl_role_name_error" ng-class="{ 'hasError' : (submitted && User.FirstNameIsEmpty)  }">
+                                            <input id="txt_firstname" type="text" class="full-width" ng-model="User.FirstName" placeholder="First Name" maxlength="20">
+                                            <span class="errorDescription"><i class="icon-error"></i><span class="errorText">First Name cannot be empty</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5">Last Name*</div>
+                                    <div class="col-md-7">
+                                        <div id="lbl_role_name_error" ng-class="{ 'hasError' : (submitted && User.LastNameIsEmpty)  }">
+                                            <input id="txt_lastname" type="text" class="full-width" ng-model="User.LastName" placeholder="Last Name" maxlength="20">
+                                            <span class="errorDescription"><i class="icon-error"></i><span class="errorText">Last Name cannot be empty</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5">User ID*</div>
+                                    <div class="col-md-7">
+                                        <div id="lbl_role_name_error" ng-class="{ 'hasError' : (submitted && User.UserIdIsEmpty) || (submitted && User.UsernameExists) }">
+                                            <input id="txt_userid" type="text" class="full-width" ng-model="User.UserId" placeholder="User ID" ng-disabled="isEditMode" maxlength="20">
+                                            <span ng-show="(submitted && User.UserIdIsEmpty)" class="errorDescription"><i class="icon-error"></i><span class="errorText">User ID cannot be empty</span></span>
+                                            <span ng-show="(submitted && User.UsernameExists)" class="errorDescription"><i class="icon-error"></i><span class="errorText">{{userErrorText}}</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5">User Type*</div>
+                                    <div class="col-md-7">
+                                        <div id="lbl_role_name_error" ng-class="{ 'hasError' : (submitted && User.DesignationIdIsEmpty)  }">
+                                            <div class="dropdownMenu k-content">
+                                                <select id="select_usertype" kendo-drop-down-list k-ng-model="User.DesignationId" k-options="designationOptions" class="kendo-no-search"></select>
+                                                <span class="errorDescription"><i class="icon-error"></i><span class="errorText">User type cannot be empty</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5">Designation*</div>
+                                    <div class="col-md-7">
+                                        <div id="lbl_role_name_error" ng-class="{ 'hasError' : (submitted && User.UserDesignationIsEmpty)  }">
+                                            <input id="txt_designation" type="text" class="full-width" ng-model="User.UserDesignation" placeholder="Designation" maxlength="30">
+                                            <span class="errorDescription"><i class="icon-error"></i><span class="errorText">Designation cannot be empty</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5">Email*</div>
+                                    <div class="col-md-7">
+                                        <div id="lbl_role_name_error" ng-class="{ 'hasError' : (submitted && User.EmailIsEmpty) || (submitted && User.EmailIsInvalid) || (submitted && User.EmailExists)}">
+                                            <input id="txt_email" type="text" class="full-width" ng-model="User.Email" placeholder="Email">
+                                            <span id="lbl_firstname_error" class="errorDescription" ng-show="submitted && User.EmailIsEmpty"><i class="icon-error"></i><span class="errorText">Email cannot be empty</span></span>
+                                            <span class="errorDescription" ng-show="submitted && User.EmailIsInvalid"><i class="icon-error"></i><span class="errorText">Please enter a valid Email</span></span>
+                                            <span class="errorDescription" ng-show="submitted && User.EmailExists"><i class="icon-error"></i><span class="errorText">{{emailErrorText}}</span></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5">Primary Hub*</div>
+                                    <div class="col-md-7">
+                                        <div id="lbl_role_name_error" ng-class="{ 'hasError' : (submitted && User.OrganizationIdIsEmpty)}">
+                                            <div class="dropdownMenu k-content">
+                                                <input ng-disabled="disableHubs" $scope.disablehubs id="select_primaryhub" kendo-drop-down-list k-ng-model="User.OrganizationId" k-options="selectOptions" class="kendo-no-search">
+                                                <span class="errorDescription"><i class="icon-error"></i><span class="errorText">Primary Hub cannot be empty</span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div ng-if="!disableHubs" class="row">
+                                    <div class="col-md-5">Secondary Hub(s)</div>
+                                    <div class="col-md-7">
+                                        <div class="dropdownMenu k-content">
+                                            <input id="select_secondaryhub" kendo-multi-select="multi" k-options="selectHubsOptions" k-ng-model="User.SecondaryHubIds">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-5">Role(s)*</div>
+                                    <div class="col-md-7">
+                                        <div id="lbl_role_name_error" ng-class="{ 'hasError' : (submitted && User.RolesIsEmpty)}">
+                                            <div ng-hide="isUserHubAdmin=='True' && role.Name=='Admin'" class="pull-left margin-right-10" ng-repeat="role in Roles">
+                                                <label class="checkbox-inline-compact">
+                                                    <input id="chk_{{role.Id}}" type="checkbox" ng-model="role.selected" ng-true-value="true" ng-false-value="false"> {{role.Name}}
+                                                </label>
+                                            </div>
+                                            <span class="errorDescription"><i class="icon-error"></i><span class="errorText">Roles cannot be empty</span></span>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-right">
+                                <button id="btn_reset" confirm-button="Reset()" title="Reset" message="Are you sure you want to Reset?" yes="Yes" no="No" placement="right" ng-show="isEditMode" type="button" class="btn btn-primary pull-left margin-left-10">Reset Password</button>
+                                <button id="btn_cancel" type="button" class="btn btn-primary inline-btn btn-dark pull-right margin-left-5" ng-click="toggleModal()">Cancel</button>
+                                <button id="btn_save" ng-disabled="disableSave" type="button" class="btn btn-primary inline-btn pull-right margin-left-5" ng-click="Save()">Save</button>
+                            </div>
+                        </modal>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

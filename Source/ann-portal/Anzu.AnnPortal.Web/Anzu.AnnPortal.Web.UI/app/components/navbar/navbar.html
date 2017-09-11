@@ -1,0 +1,28 @@
+<md-toolbar class="navbar" ng-controller="Components.NavbarCtrl">
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleSlideMenu()">
+            <i class="fa fa-bars white fa-2" aria-hidden="true"></i>
+        </md-button>
+        <h2 class="app-title" layout layout-align="start center">
+            <span style="font-weight:100;font-size: 1.2em;"><img style="height:40px;" src="app/assets/images/ANN_Logo.png" /></span>
+            <span class="divider hidden-xs hidden-sm">&nbsp;</span>
+            <span class="uppercase hidden-xs hidden-sm" style="font-size:.9em">Aesthetic <span style="font-weight:100">Neural Network</span></span>
+            <span class="divider hidden-xs hidden-sm" ng-hide="isAdmin()">&nbsp;</span>
+            <span class="uppercase hidden-xs hidden-sm" style="font-size:.9em" ng-hide="isAdmin()">{{emrId}}</span>
+        </h2>
+        <h2 class="ng-hide" style="height:100%;padding-left:3em;background:#eee;border-top-left-radius:1em;">
+            <span class="" style="font-size:.9em;line-height:45px;"><span style="font-weight:100;color:#000">{{vm.dashboardTitle}}</span></span>
+            <md-button class="md-button md-icon-button filters-list" aria-label="Settings" ng-click="toggleFiltersList()">
+                <i class="fa fa-filter" style="color:#888" aria-hidden="true"></i>
+            </md-button>
+        </h2>
+        <md-button class="ng-hide md-button hidden-xs hidden-sm" aria-label="Settings" ng-click="toggleFilters()">
+            <i class="fa fa-filter white" aria-hidden="true"></i> <span>Filters</span>
+        </md-button>
+
+        <div ng-hide="isAdmin()" class="nav-bar-procedure-revenue">
+            <span>TOTAL REVENUE ($): {{vm.totalRevenue | number : 0}}</span>
+            <span class="nav-bar-procedure">TOTAL PROCEDURES: {{vm.totalProcedures | number : 0}} </span>
+        </div>
+    </div>
+</md-toolbar>

@@ -1,0 +1,33 @@
+<div ng-include="'app/components/navbar/navbar.html'"></div>
+
+
+<div class="module-settings has-navbar">
+    <div class="breadcrumb">
+        <div class="breadcrumb-container row">
+            <div class="col-xs-6" ng-show="vm.subTitle">
+                <span><a href="#/admin/practice-management">Practice Management</a>&nbsp;<i class="fa fa-angle-right"></i></span>&nbsp;<span ng-if="vm.showEmrId">{{tempEmrId}}</span>
+            </div>
+            <div class="col-xs-6 text-right pull-right jump-to">
+                <!--<a href="#/admin/practice-management"></a>-->
+            </div>
+        </div>
+    </div>
+    <div class="settings-page">
+        <h1>{{vm.subTitle || 'Practice Management'}}</h1>
+        <br />
+        <div class="text-right" ng-if="vm.showCreateBtn">
+            <a class="button primary" href="#/admin/practice-management/new/edit" ng-click="save($event)">
+                <i class="fa fa-plus"></i> Create
+            </a>
+        </div>
+        <div class="text-right" ng-if="vm.showCreateMappingBtn">
+            <a class="button primary" ng-click="addMapping()">
+                <i class="fa fa-plus"></i> Create
+            </a>
+        </div>
+        <br />
+        <div class="group">
+            <ui-view />
+        </div>
+    </div>
+</div>

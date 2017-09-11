@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Application Error - " + ViewBag.Code;
+    Layout = "~/Views/Shared/_ErrorLayout.cshtml";
+}
+
+<h2>@ViewBag.Code</h2>
+<p>
+    @ViewBag.Description <a href="#" onclick="back();">go back</a>
+</p>
+
+<script>
+    function back() {
+        window.history.back();
+    }
+</script>

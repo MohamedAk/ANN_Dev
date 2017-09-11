@@ -1,0 +1,194 @@
+<style>
+    body {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    #confirmPopup {
+        background: rgba(0, 0, 0, 0.55);
+        opacity: 1 !important;
+    }
+
+        #confirmPopup > div.modal-dialog {
+            margin-top: 120px;
+        }
+
+        #confirmPopup.showPopup {
+            display: block !important;
+        }
+
+    .mCSB_scrollTools .mCSB_draggerContainer {
+        right: -60px;
+    }
+
+    .mCSB_1_dragger_vertical {
+        background: #f00;
+    }
+
+    .mCSB_dragger_bar {
+        border-radius: 0px !important;
+        width: 8px !important;
+    }
+
+    label {
+        line-height: 24px;
+        margin-bottom: 0px;
+    }
+
+    #myGrid > .k-grid-content {
+        height: calc(100vh - 395px);
+        overflow-x: hidden;
+    }
+
+    div.radio {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    a.button {
+        margin-left: 0px;
+    }
+
+    .no-padding-left {
+        padding-left: 0px;
+    }
+
+    .no-margin-left {
+        margin-left: 0px;
+    }
+
+    .custom-left-margin {
+        margin-left: 32px !important;
+    }
+
+    .no-data-alert {
+        text-align: center;
+    }
+</style>
+<div id="filterMappingList" class="practice-list modifiedKendoGrid" ng-controller="Admin.ProcedureFilterMappingsCtrl.IndexCtrl">
+    <!--<div class="row header-row">
+
+    </div>-->
+    <div class="row">
+        <!--Left Pane-->
+        <div class="col-md-6">
+            <div class="col-md-12 no-padding-left">
+                <h4>Search For</h4>
+            </div>
+            <div class="col-md-7 no-padding-left">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label><input type="radio" name="searchOption" ng-model="searchOption" value="1" data-ng-keypress="onSearchInputKeyPress($event)">Procedure Name</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label><input type="radio" name="searchOption" ng-model="searchOption" value="4" data-ng-keypress="onSearchInputKeyPress($event)">Level 3</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label><input type="radio" name="searchOption" ng-model="searchOption" value="2" data-ng-keypress="onSearchInputKeyPress($event)">Level 1</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label><input type="radio" name="searchOption" ng-model="searchOption" value="5" data-ng-keypress="onSearchInputKeyPress($event)">Level 4</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="radio">
+                            <label><input type="radio" name="searchOption" ng-model="searchOption" value="3" data-ng-keypress="onSearchInputKeyPress($event)">Level 2</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="row">
+                    <input type="text" class="form-control" id="contactName" placeholder="Search Text" ng-model="searchText" no-special-char data-ng-keypress="onSearchInputKeyPress($event)">
+                </div>
+                <div class="row pull-right">
+                    <button type="button" class="btn btn-primary no-margin-left" ng-click="resetSearch();">Reset</button>
+                    <a class="button primary custom-margin" ng-click="search()">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!--Right Pane-->
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <h4>Sort By</h4>
+            </div>
+            <div class="col-md-4">
+                <div class="radio">
+                    <label><input type="radio" name="sortOption" ng-model="sortOption" value="4" ng-change="search()">Last Updated Date</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="radio">
+                    <label><input type="radio" name="sortOption" ng-model="sortOption" value="2" ng-change="search()">Breast Implant Use</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="radio">
+                    <label><input type="radio" name="sortOption" ng-model="sortOption" value="7" ng-change="search()">Level 3</label>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="radio">
+                    <label><input type="radio" name="sortOption" ng-model="sortOption" value="3" ng-change="search()">Related Procedures</label>
+                </div>
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="radio">
+                    <label><input type="radio" name="sortOption" ng-model="sortOption" value="5" ng-change="search()">Level 1</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="radio">
+                    <label><input type="radio" name="sortOption" ng-model="sortOption" value="8" ng-change="search()">Level 4</label>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-xs-12">
+                <div class="radio">
+                    <label><input type="radio" name="sortOption" ng-model="sortOption" value="1" ng-change="search()">Procedure Name</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="radio">
+                    <label><input type="radio" name="sortOption" ng-model="sortOption" value="6" ng-change="search()">Level 2</label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row no-gutter">
+        <div class="col-xs-12">
+            <div kendo-grid="myGrid" options="mainGridOptions"
+                 id="myGrid" class="full_height fix-style">
+            </div>
+        </div>
+    </div>
+    <!--Confirm Modal-->
+    <modal title="Are You Sure?" id="confirmPopup" role="dialog">
+        <div class="row" id="modal-body">
+            <p id="popText"></p>
+        </div>
+        <div class="row text-right">
+            <button class="btn btn-primary" type="button" ng-disabled="yesClicked" ng-click="confirmYes()">Yes</button>
+            <button class="btn btn-warning" type="button" ng-click="confirmNo()">No</button>
+        </div>
+    </modal>
+    <modal title="Cube Refresh" visible="showOkModal" id="confirmOKPopup" class="hide" ng-cloak>
+        <div class="row" id="modal-body">
+            <p>Cube refresh is in progress. Edit and Remove operations are not allowed</p>
+        </div>
+        <div class="row text-right">
+            <button class="btn btn-warning" type="button" ng-click="confirmNo()">OK</button>
+        </div>
+    </modal>
+</div>

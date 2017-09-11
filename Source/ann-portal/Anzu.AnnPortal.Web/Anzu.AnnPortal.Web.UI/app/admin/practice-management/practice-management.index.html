@@ -1,0 +1,235 @@
+<style>
+    body {
+        overflow: hidden;
+        height: 100%;
+    }
+
+    label {
+        line-height: 24px;
+        margin-bottom: 0px;
+    }
+
+    div.radio {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        padding-left: 2px;
+    }
+
+    a.button {
+        height: 32px;
+        padding-top: 4px;
+    }
+
+    .col-md-4.custom-w {
+        width: 30%;
+    }
+
+    .mCSB_scrollTools .mCSB_draggerContainer {
+        right: -60px;
+    }
+
+    .mCSB_1_dragger_vertical {
+        background: #f00;
+    }
+
+    .mCSB_dragger_bar {
+        border-radius: 0px !important;
+        width: 8px !important;
+    }
+
+    .deactive-item {
+        background: rgba(66, 66, 66, 0.15);
+        opacity: 0.5;
+    }
+
+    .custom-margin {
+        margin-top: 2px !important;
+    }
+
+    #practiceList {
+        height: calc(100vh - 405px) !important;
+    }
+
+    #confirmPopup {
+        background: rgba(0, 0, 0, 0.55);
+        opacity: 1 !important;
+    }
+
+        #confirmPopup > div.modal-dialog {
+            margin-top: 120px;
+        }
+
+        #confirmPopup.showPopup {
+            display: block !important;
+        }
+</style>
+<div class="row header-row">
+    <div class="col-md-12">
+        <h4>Search For</h4>
+    </div>
+</div>
+<div ng-controller="Admin.PracticeManagement.IndexCtrl" ng-init="init()">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-4 custom-w">
+                    <div class="radio">
+                        <label><input type="radio" ng-model="searchOption" value="practiceId" name="searchOption" data-ng-keypress="onSearchInputKeyPress($event)">Practice ID</label>
+                    </div>
+                </div>
+                <div class="col-md-4 custom-w">
+                    <div class="radio">
+                        <label><input type="radio" ng-model="searchOption" value="practiceName" name="searchOption" data-ng-keypress="onSearchInputKeyPress($event)">Practice Name</label>
+                    </div>
+                </div>
+                <div class="col-md-4 custom-w">
+                    <div class="radio">
+                        <label><input type="radio" ng-model="searchOption" value="contactPerson" name="searchOption" data-ng-keypress="onSearchInputKeyPress($event)">Contact Person</label>
+                    </div>
+                </div>
+                <div class="col-md-4 custom-w">
+                    <div class="radio">
+                        <label><input type="radio" ng-model="searchOption" value="address" name="searchOption" data-ng-keypress="onSearchInputKeyPress($event)">Address</label>
+                    </div>
+                </div>
+                <div class="col-md-4 custom-w">
+                    <div class="radio">
+                        <label><input type="radio" ng-model="searchOption" value="city" name="searchOption" data-ng-keypress="onSearchInputKeyPress($event)">City</label>
+                    </div>
+                </div>
+                <div class="col-md-4 custom-w">
+                    <div class="radio">
+                        <label><input type="radio" ng-model="searchOption" value="state" name="searchOption" data-ng-keypress="onSearchInputKeyPress($event)">State</label>
+                    </div>
+                </div>
+                <div class="col-md-4 custom-w">
+                    <div class="radio">
+                        <label><input type="radio" ng-model="searchOption" value="contactNo" name="searchOption" data-ng-keypress="onSearchInputKeyPress($event)">Contact No</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-8">
+                    <input type="text" class="form-control" id="contactName" placeholder="Search Text" ng-model="searchText" data-ng-keypress="onSearchInputKeyPress($event)" no-special-char>
+                </div>
+                <div class="col-md-4">
+                    <button type="button" class="btn btn-primary" ng-click="clearSearch();">Reset</button>
+                    <a class="button primary custom-margin" ng-click="search()">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr />
+    <div id="practiceList" class="practice-list" practice-list="215">
+        <div kendo-list-view="listView" id="listView" style="border: none; " k-data-source="practiceDataSource" ng-show="hasData" ng-cloak>
+            <div k-template>
+                <div class="practice-item #if(!isActive){#deactive-item#}#">
+                    <h4>
+                        #:name# <span class="uppercase subtitle">#if(city === null){# N/A #}else{# #=city#  #}#,  #if(state === null){# N/A #}else{# #=state.name#  #}#</span>
+                    </h4>
+                    <div class="row">
+                        <div class="col-md-5">
+                            Contact - #if(contactPerson === null){# N/A #}else{# #=contactPerson#  #}# (#if(contactNumber === null){# N/A #}else{# #=contactNumber#  #}#)
+                            <br /> Address - #if(addressLine1 === null){# N/A #}else{# #=addressLine1##}#, #if(addressLine2 === null){# N/A #}else{# #=addressLine2##}#, #if(city === null){# N/A #}else{# #=city##}#, #if(state === null){# N/A #}else{# #=state.name##}#, #if(zipCode === null){# N/A #}else{# #=zipCode.code# #}#
+
+                            #if(USER_ROLE ==='SUPER_ADMIN' || USER_ROLE ==='ADMINISTRATOR'){#
+                            <br />
+                            <br /> <small><em>Last Refreshed at: #:lastUpdatedDate#</em></small>
+                            #}#
+                        </div>
+                        <div class="col-md-6 text-right">
+                            #if(USER_ROLE ==='SUPER_ADMIN'){#
+                            <a class="button" onclick="viewPractice(#=id#, '#=emrId#')" style="box-sizing: border-box;" title="Click to view the Practice's dashboards">
+                                <i class="fa fa-external-link" aria-hidden="true"></i> View
+                            </a>
+                            #}#
+                            <a class="button" href="\\#/admin/practice-management/#=id#/edit" style="box-sizing: border-box;" title="Click to edit the practice details">
+                                <i class="fa fa-pencil" aria-hidden="true"></i> Edit
+                            </a>
+                            <button class="primary" aria-label="Settings" ng-click="goToUrl('/admin/practice-management/#=emrId#/emr-mapping')" ng-disabled="#=hasData#" title="Click to edit the EMR mappings">
+                                <i class="fa fa-pencil" aria-hidden="true"></i> EMR Mappings
+                            </button>
+                            #if(isActive){#
+                            <button class="primary" aria-label="Settings" ng-click="deactiveate(#=id#, false, '#=emrId#')" ng-disabled="isCubeProcessing" title="Click to deactivate the practice">
+                                <i class="fa fa-eye-slash" aria-hidden="true"></i> Deactivate
+                            </button>
+                            #}else{#
+                            <button class="primary" aria-label="Settings" ng-click="deactiveate(#=id#, true, '#=emrId#')" ng-disabled="isCubeProcessing" title="Click to activate the practice">
+                                <i class="fa fa-eye" aria-hidden="true"></i> Activate
+                            </button>
+                            #}#
+                            #if(USER_ROLE ==='SUPER_ADMIN' || USER_ROLE ==='ADMINISTRATOR'){#
+                            <button class="primary" aria-label="Settings" ng-click="addToRefreshProcess('#=emrId#')" ng-disabled="isSelected('#=emrId#') || isCubeProcessing" title="Click to refresh the cube">
+                                <i class="fa fa-refresh faa-spin" ng-class="{animated:checkProcessStatus('#=emrId#') && isCubeProcessing}" aria-hidden="true"></i> Refresh Cube
+                                <!--animated - add this to animate-->
+                            </button>
+                            #}#
+                        </div>
+                    </div>
+                </div>
+                <hr />
+            </div>
+        </div>
+        <div class="btn-bar afkl-sticky-element afkl-sticky-element--sticky" afkl-sticky-element="bottom" style="bottom: 0px;">
+            <button class="" aria-label="Settings" ng-click="cancelRefreshProcess()" ng-disabled="cancelButtonStatus()">
+                Cancel
+            </button>
+            <button class="primary" aria-label="Refresh Selected Cubes" ng-click="startRefreshProcess()" ng-disabled="!isItemsSelected || isCubeProcessing">
+                Selected Cube Refresh
+            </button>
+            <button class="primary" aria-label="Refresh All Cubes" ng-click="processAllCubes()" ng-disabled="isCubeProcessing">
+                Full Cube Refresh
+            </button>
+        </div>
+        <div ng-hide="hasData" ng-cloak>
+            <div class="row">
+                <div class="col-md-12">
+                    <span>No data available for the given search criteria</span>
+                </div>
+            </div>
+        </div>
+        <modal id="confirmPopup" role="dialog">
+            <div id="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p id="popText"></p>
+                    </div>
+                </div>
+                <div class="row" ng-if="!showPopupOk" ng-show="popupType == 1">
+                    <div class="col-md-12" ng-if="practiceStatus">
+                        <div class="checkbox">
+                            <label><input type="checkbox" ng-model="dataDeleteOption" ng-click="updateDataDeleteStatus(dataDeleteOption)" name="dataDeleteOption">Delete Practice Data?</label>
+                        </div>
+                        <div ng-show="dataDeleteOption">
+                            <label class="radio-inline"><input type="radio" ng-model="processCubeOption" ng-click="updateCubeRefreshStatus(processCubeOption)" name="processCubeOption" value="0">Refresh Cube Later</label>
+                            <label class="radio-inline"><input type="radio" ng-model="processCubeOption" ng-click="updateCubeRefreshStatus(processCubeOption)" name="processCubeOption" value="1">Refresh Cube Now</label>
+                        </div>
+                    </div>
+                    <!--Activate-->
+                    <div class="col-md-12" ng-if="!practiceStatus">
+                        <label class="radio-inline"><input type="radio" ng-model="processCubeOption" ng-click="updateCubeRefreshStatus(processCubeOption)" name="processCubeOption" value="0">Refresh Cube Later</label>
+                        <label class="radio-inline"><input type="radio" ng-model="processCubeOption" ng-click="updateCubeRefreshStatus(processCubeOption)" name="processCubeOption" value="1">Refresh Cube Now</label>
+                    </div>
+                </div>
+                <div class="row" ng-if="!showPopupOk" ng-show="popupType == 0">
+                    <div class="col-md-12" ng-show="cubeProcessDisplayQueue.length > 0">
+                        <ol>
+                            <li ng-repeat="queueItem in cubeProcessDisplayQueue track by $index ">{{queueItem.emrId}} - {{queueItem.name}}</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="row text-right" ng-if="!showPopupOk">
+                <button class="btn btn-primary" type="button" ng-click="confirmYes()">Yes</button>
+                <button class="btn btn-warning" type="button" ng-click="confirmNo()">No</button>
+            </div>
+            <div class="row text-right" ng-if="showPopupOk">
+                <button class="btn btn-warning" type="button" ng-click="confirmOK()">OK</button>
+            </div>
+        </modal>
+    </div>
+</div>
